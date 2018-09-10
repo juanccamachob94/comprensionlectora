@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/09/2018 12:51:42 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.com.juan.camacho.entidadesdb.Post" table="post" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="userapp" class="mx.com.juan.camacho.entidadesdb.Userapp" fetch="select">
+            <column name="author_userapp_id" not-null="true" />
+        </many-to-one>
+        <property name="title" type="string">
+            <column name="title" length="500" not-null="true" />
+        </property>
+        <property name="FCreate" type="timestamp">
+            <column name="f_create" length="29" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" not-null="true" />
+        </property>
+        <set name="comments" table="comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="post_id" />
+            </key>
+            <one-to-many class="mx.com.juan.camacho.entidadesdb.Comment" />
+        </set>
+        <set name="tests" table="test" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="post_id" not-null="true" />
+            </key>
+            <one-to-many class="mx.com.juan.camacho.entidadesdb.Test" />
+        </set>
+    </class>
+</hibernate-mapping>

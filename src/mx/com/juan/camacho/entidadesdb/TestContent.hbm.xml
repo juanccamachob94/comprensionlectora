@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/09/2018 12:51:42 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.com.juan.camacho.entidadesdb.TestContent" table="test_content" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="test" class="mx.com.juan.camacho.entidadesdb.Test" fetch="select">
+            <column name="test_id" not-null="true" />
+        </many-to-one>
+        <property name="type" type="string">
+            <column name="type" length="150" not-null="true" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:cl="comprensionlectora/facelets">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Característica responsiva -->
+        <meta name="viewport" content="width=device-width"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputScript library="javax.faces" name="jsf.js" target="head" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+        <h:outputScript name="./js/main.js"/>
+        <!--link rel="shortcut icon" href="../../../favicon.ico"-->
+        <title>Comprensión lectora</title>
+    </h:head>
+    <h:body>
+    	<f:event type="preRenderView" listener="#{generalVistaBean.permitirAcceso()}"/>
+        <f:metadata>
+            <f:viewAction action="#{usuarioBean.cargarUsuario()}"/>
+        </f:metadata>
+
+        <!-- Formulario de inicio de sesión -->
+	    <h:form id="formIniciarSesion" class="formIniciarSesion">
+	    	<center>
+	    		<h:graphicImage styleClass="horizontal" value="#{generalBean.saltosDirec}../resources/imgs/logo.png" width="269px"/>
+	    	</center>
+	    	<!-- Panel de inicio de sesión -->
+	    	<p:panel id="panelIniciarSesion" class="panelIniciarSesion" header="Inicio de sesión">
+	    		<h:panelGroup id="pgIniciarSesion">
+	    		<table class="tablasinborde">
+	    			<!-- usuario -->
+	    			<tr>
+	    				<td class="td-label-login">
+	    					<h:outputLabel for="usuario" value="Usuario:"/>
+	    				</td>
+	    				<td class="td-input-login">
+	    					<p:inputText id="usuario" rendered="#{not empty usuarioBean.userapp}" value="#{usuarioBean.userapp.userappname}" required="true" requiredMessage="usuario obligatorio"/>
+	    				</td>
+	    			</tr>
+	    			<tr>
+	    				<td colspan="2" class="td-mensaje-login">
+	    					<p:message for="usuario" display="tooltip"/>
+	    				</td>
+	    			</tr>
+	    			<!-- contraseña -->
+	    			<tr>
+	    				<td class="td-label-login">
+	    					<h:outputLabel for="password" value="Contraseña:"/>
+	    				</td>
+	    				<td class="td-input-login">
+	    					<input id="passwordvisual" type="password" class="ui-inputfield ui-password ui-widget ui-state-default ui-corner-all"/>
+	    					<p:password id="password" style="display:none" rendered="#{not empty usarioBean.userapp}" styleClass="password" value="#{usuarioBean.userapp.password}" required="true" requiredMessage="contraseña obligatoria"/>
+	    				</td>
+	    			</tr>
+	    			<tr>
+	    				<td colspan="2" class="td-mensaje-login">
+	    					<p:message for="password" display="tooltip"/>
+	    				</td>
+	    			</tr>
+	    		</table>
+
+          <p:messages autoUpdate="false" closable="true"/>
+				<br/>
+	    		</h:panelGroup>
+	    		<p:commandButton id="btnIniciarSesion" value="Iniciar sesión" styleClass="btnIniciarSesion" actionListener="#{usuarioBean.startSession()}" process="@form" update="pgIniciarSesion" onstart="mostrarCargando('bloqueoFormIniciarSesion')" oncomplete="ocultarCargando('bloqueoFormIniciarSesion')"/>
+	    	</p:panel>
+	    	<cl:cargando nombre="bloqueoFormIniciarSesion" bloqueo="panelIniciarSesion"/>
+	    </h:form>
+	    <p style="text-align:justify;font-size:10px !important" class="panelIniciarSesion">
+        Bienvenido al sistema de comprensión lectora en el que podrás participar en la comunidad con contenidos de cada uno de sus integrantes. Podrás leer y crear tus propios documentos de cualquier tema de interés. Además de ello podrás realizar evaluaciones o presentar evaluaciones que otros hayan publicado para identificar tu nivel de comprensión lectora.
+	    </p>
+    </h:body>
+</html>
