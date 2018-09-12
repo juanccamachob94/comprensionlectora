@@ -71,7 +71,6 @@ public class UsuarioBean implements java.io.Serializable {
   }
 
   public boolean isSessionStarted() {
-	  return true;
     try {
       return this.userapp.getUserappname() != null && this.userapp.getPassword() != null && this.getSessionCustomMap().get("userapp") != null;
     } catch(Exception e) {
@@ -93,11 +92,11 @@ public class UsuarioBean implements java.io.Serializable {
     }
   }
 
-  public void startSessionData(Userapp userapp) {
+  public void startSessionData(Userapp userapp) throws Exception {
     this.userapp = null;
     this.userappSession = userapp;
     this.getSessionCustomMap().put("userapp",userapp);
-    this.showPage("/inicio/inicioSistema");
+    this.showPage("inicio/inicioSistema");
   }
 
   public void startSession() {

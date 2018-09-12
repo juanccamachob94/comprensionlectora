@@ -6,13 +6,16 @@
     <class name="mx.com.juan.camacho.entidadesdb.Test" table="test" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
-        <many-to-one name="post" class="mx.com.juan.camacho.entidadesdb.Post" fetch="select">
-            <column name="post_id" not-null="true" />
+        <many-to-one name="blog" class="mx.com.juan.camacho.entidadesdb.Blog" fetch="select">
+            <column name="blog_id" not-null="true" />
         </many-to-one>
         <property name="name" type="string">
             <column name="name" length="200" not-null="true" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" not-null="true" />
         </property>
         <property name="FCreate" type="timestamp">
             <column name="f_create" length="29" not-null="true" />

@@ -1,10 +1,22 @@
 body {
   background: url(../imgs/background.jpg) no-repeat;
   background-size: cover;
-  font-size: 12px;
   font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
-  margin: 10px;
-  padding:10px;
+  padding: 5px;
+}
+
+/*Por causa de Bootstrap:*/
+label {
+	font-weight:100!important;
+}
+
+.logo {
+	border: 5px solid #757575;
+    border-radius: 5px;
+	
+}
+.logo:hover {
+	box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
 a:link, a:visited {
@@ -43,4 +55,22 @@ a:link:hover, a:visited:hover  {
 
 .centrado {
   margin: auto;
+}
+
+html, body {
+	height: 93%;
+
+}
+
+#contenido {
+	padding: 2em;
+	background: #BDBDBD;
+	opacity: 0.95;
+	filter: alpha(opacity=95);
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px #757575;
+	min-height:100%;
+  	background: -webkit-linear-gradient(to right, #FFFFFF, #BDBDBD);
+  	background: linear-gradient(to right, #FFFFFF, #BDBDBD);
+
 }

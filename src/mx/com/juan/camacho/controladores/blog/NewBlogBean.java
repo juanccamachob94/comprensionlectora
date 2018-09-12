@@ -2,6 +2,8 @@ package mx.com.juan.camacho.controladores.blog;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import mx.com.juan.camacho.entidadesdb.Blog;
+import mx.com.juan.camacho.beans.GeneralVistaBean;
 
 @ManagedBean
 @ViewScoped

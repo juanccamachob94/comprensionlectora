@@ -6,7 +6,7 @@
     <class name="mx.com.juan.camacho.entidadesdb.Question" table="question" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="test" class="mx.com.juan.camacho.entidadesdb.Test" fetch="select">
             <column name="test_id" not-null="true" />

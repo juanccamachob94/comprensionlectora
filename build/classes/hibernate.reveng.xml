@@ -9,5 +9,5 @@
   <table-filter match-name="test_content"/>
   <table-filter match-name="userapp"/>
   <table-filter match-name="comment"/>
-  <table-filter match-name="post"/>
+  <table-filter match-name="blog"/>
 </hibernate-reverse-engineering>

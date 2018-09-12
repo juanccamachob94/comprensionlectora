@@ -1,6 +1,6 @@
 package mx.com.juan.camacho.controladores.test;
 
-import mx.com.juan.camacho.controladores.beans.GeneralVistaBean;
+import mx.com.juan.camacho.beans.GeneralVistaBean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -21,7 +21,7 @@ public class TestBean extends GeneralVistaBean {
 
   public int getPuntosObtenidos() {
     try {
-      return this.dataSource.contar("SELECT COUNT(uq.earnedPoints) FROM UserappQuestion uq WHERE uq.userapp.id" = this.usuarioBean.getUserappSession().getId());
+      return this.dataSource.contar("SELECT COUNT(uq.earnedPoints) FROM UserappQuestion uq WHERE uq.userapp.id = " + this.usuarioBean.getUserappSession().getId());
     } catch(Exception e) {
       return 0;
     }

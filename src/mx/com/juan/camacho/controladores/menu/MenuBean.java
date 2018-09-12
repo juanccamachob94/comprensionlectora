@@ -3,6 +3,8 @@ package mx.com.juan.camacho.controladores.menu;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import mx.com.juan.camacho.beans.GeneralBean;
+import mx.com.juan.camacho.entidadesdb.Menu;
+
 import java.util.List;
 
 @ManagedBean

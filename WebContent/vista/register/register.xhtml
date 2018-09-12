@@ -11,6 +11,7 @@
         <!-- Característica responsiva -->
         <meta name="viewport" content="width=device-width"/>
         <h:outputStylesheet name="css/main.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
         <h:outputScript library="javax.faces" name="jsf.js" target="head" />
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
         <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
@@ -19,48 +20,53 @@
         <title>Comprensión lectora</title>
     </h:head>
     <h:body>
+    <div id="contenido">
     	<f:event type="preRenderView" listener="#{generalVistaBean.permitirAcceso()}"/>
-      <h:panelGrid id="pgRegister" cellpadding="5" columns="3">
-        <f:facet>
-          <p:messages id="msgs"/>
-        </f:facet>
-        <p:outputLabel for="userappname" value="Username:"/>
-        <p:inputText id="userappname" value="#{registerBean.newUserapp.userappname}" required="true" requiredMessage="El nombre de usuario es requerido"/>
-        <p:message for="userappname" display="tooltip"/>
+    	<h:form>
+         <h1>Registro</h1>
+	      <h:panelGrid id="pgRegister" cellpadding="5" columns="3">
+	        <f:facet name="facetregister">
+	          <p:messages id="msgs"/>
+	        </f:facet>
+	        <p:outputLabel for="userappname" value="Username:"/>
+	        <p:inputText id="userappname" value="#{registerBean.newUserapp.userappname}" required="true" requiredMessage="El nombre de usuario es requerido"/>
+	        <p:message for="userappname" display="tooltip"/>
+	
+	        <p:outputLabel for="name" value="Nombre:"/>
+	        <p:inputText id="name" value="#{registerBean.newUserapp.name}" required="true" requiredMessage="El nombre es requerido"/>
+	        <p:message for="name" display="tooltip"/>
+	
+	        <p:outputLabel for="lastname" value="Apellido:"/>
+	        <p:inputText id="lastname" value="#{registerBean.newUserapp.lastname}" required="true" requiredMessage="El apellido es requerido"/>
+	        <p:message for="lastname" display="tooltip"/>
+	
+	        <p:outputLabel for="email" value="Email:"/>
+	        <p:inputText id="email" value="#{registerBean.newUserapp.email}" required="true" requiredMessage="La contraseña es requerida"/>
+	        <p:message for="email" display="tooltip"/>
+	
+	        <p:outputLabel for="sex" value="Sexo:"/>
+	        <p:selectOneRadio id="sex" value="#{registerBean.newUserapp.sex}" required="true" requiredMessage="El sexo es requerido">
+	          <f:selectItem itemLabel="Masculino" itemValue="M" />
+	          <f:selectItem itemLabel="Femenino" itemValue="F" />
+	        </p:selectOneRadio>
+	        <p:message for="sex" display="tooltip"/>
+	
+	        <p:outputLabel for="password" value="Contraseña:"/>
+	        <p:inputText id="password" value="#{registerBean.newUserapp.password}" required="true" requiredMessage="La contraseña es requerida"/>
+	        <p:message for="password" display="tooltip"/>
+	
+	        <p:outputLabel for="confirm_password" value="Repetir contraseña:"/>
+	        <p:inputText id="confirm_password" value="#{registerBean.confirm_password}" required="true" requiredMessage="Debe confirmar la contraseña"/>
+	        <p:message for="confirm_password" display="tooltip"/>
+	
+	        <p:outputLabel for="imagen" value="Imagen de perfil:"/>
+	        <p:fileUpload id="imagen" label="Seleccionar imagen" value="#{registerBean.archivoImagen}" mode="simple" skinSimple="true"/>
+	      </h:panelGrid>
+	
+	      <p:commandButton id="btnRegister" value="Registarme" class="btn btn-primary" actionListener="#{registerBean.register()}" process="@form" update="@form" onstart="mostrarCargando('bloqueoPgRegister')" oncomplete="ocultarCargando('bloqueoPgRegister')"/>
+	      <cl:cargando nombre="bloqueoPgRegister" bloqueo="pgRegister"/>
+    	</h:form>
 
-        <p:outputLabel for="name" value=""/>
-        <p:inputText id="name" value="#{registerBean.newUserapp.name}" required="true" requiredMessage="El nombre es requerido"/>
-        <p:message for="name" display="tooltip"/>
-
-        <p:outputLabel for="lastname" value=""/>
-        <p:inputText id="lastname" value="#{registerBean.newUserapp.lastname}" required="true" requiredMessage="El apellido es requerido"/>
-        <p:message for="lastname" display="tooltip"/>
-
-        <p:outputLabel for="email" value=""/>
-        <p:inputText id="email" value="#{registerBean.newUserapp.email}" required="true" requiredMessage="La contraseña es requerida"/>
-        <p:message for="email" display="tooltip"/>
-
-        <p:outputLabel for="sex" value=""/>
-        <p:selectOneRadio id="sex" value="#{registerBean.newUserapp.sex}" required="true" requiredMessage="El sexo es requerido">
-          <f:selectItem itemLabel="Masculino" itemValue="M" />
-          <f:selectItem itemLabel="Femenino" itemValue="F" />
-        </p:selectOneRadio>
-        <p:message for="sex" display="tooltip"/>
-
-        <p:outputLabel for="password" value=""/>
-        <p:inputText id="password" value="#{registerBean.newUserapp.password}" required="true" requiredMessage="La contraseña es requerida"/>
-        <p:message for="password" display="tooltip"/>
-
-        <p:outputLabel for="confirm_password" value=""/>
-        <p:inputText id="confirm_password" value="#{registerBean.confirm_password" required="true" requiredMessage="Debe confirmar la contraseña"/>
-        <p:message for="confirm_password" display="tooltip"/>
-
-        <p:outputLabel for="imagen" value="Imagen de perfil"/>
-        <p:fileUpload id="imagen" label="Seleccionar imagen" value="#{registerBean.archivoImagen}" mode="simple" skinSimple="true"/>
-      </h:panelGrid>
-
-      <p:commandButton id="btnRegister" value="Registarme" actionListener="#{registerBean.register()}" process="@form" update="@form" onstart="mostrarCargando('bloqueoPgRegister')" oncomplete="ocultarCargando('bloqueoPgRegister')"/>
-      <cl:cargando nombre="bloqueoPgRegister" bloqueo="pgRegister"/>
-
+	</div>
     </h:body>
 </html>

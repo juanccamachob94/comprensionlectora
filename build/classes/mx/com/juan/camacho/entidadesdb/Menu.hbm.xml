@@ -6,7 +6,7 @@
     <class name="mx.com.juan.camacho.entidadesdb.Menu" table="menu" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="menu" class="mx.com.juan.camacho.entidadesdb.Menu" fetch="select">
             <column name="menu_id" />
