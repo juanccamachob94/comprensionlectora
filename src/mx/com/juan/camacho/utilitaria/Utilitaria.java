@@ -65,7 +65,7 @@ public class Utilitaria {
 			urlParametros += "&" + parametro.getKey() + "=" + concatenarArreglo(parametro.getValue());
 		return urlParametros.substring(1, urlParametros.length());
 	}
-	
+
 	public static Map<String,String[]> mapaParametros(String parametros) {
 		Map<String,String[]> mapa = new HashMap<String,String[]>();
 		String[] parametro;
@@ -76,14 +76,14 @@ public class Utilitaria {
 		}
 		return mapa;
 	}
-	
+
 	public static String concatenarArreglo(String[] arreglo) {
 		String cadena = "";
 		for(int i = 0; i < arreglo.length; i++) cadena = cadena + "," + arreglo[i];
 		return cadena.substring(1,arreglo.length);
 	}
-	
-	
+
+
 
 	public static Date cadenaAFecha(String fechaString, String formato) {
 		try {
@@ -135,10 +135,30 @@ public class Utilitaria {
 		if(numDecimales > 0) decimales = "." + decimales;
         return new DecimalFormat("###,###,###" + decimales).format(precio);
     }
-	
+
 	@SuppressWarnings("deprecation")
 	public static String obtenerNombreMes(Date fecha) {
 		switch(fecha.getMonth()) {
+			case 0: return "Enero";
+			case 1: return "Febrero";
+			case 2: return "Marzo";
+			case 3: return "Abril";
+			case 4: return "Mayo";
+			case 5: return "Junio";
+			case 6: return "Julio";
+			case 7: return "Agosto";
+			case 8: return "Septiembre";
+			case 9: return "Octubre";
+			case 10: return "Noviembre";
+			case 11: return "Diciembre";
+		}
+		return null;
+	}
+
+
+  @SuppressWarnings("deprecation")
+	public static String obtenerNombreMes(int id) {
+		switch(id) {
 			case 0: return "Enero";
 			case 1: return "Febrero";
 			case 2: return "Marzo";

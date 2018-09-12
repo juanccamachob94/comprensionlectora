@@ -3,8 +3,8 @@
 <facelet-taglib>
 	<namespace>comprensionlectora/facelets</namespace>
 	<tag>
-		<tag-name>mitag</tag-name>
-		<source>nuevotag.xhtml</source>
+		<tag-name>menu</tag-name>
+		<source>menu.xhtml</source>
 	</tag>
 	<tag>
 		<tag-name>encabezadoPaginador</tag-name>

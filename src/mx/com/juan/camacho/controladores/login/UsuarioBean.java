@@ -38,8 +38,16 @@ public class UsuarioBean implements java.io.Serializable {
     return this.userapp;
   }
 
+  public void setUserapp(Userapp userapp) {
+    this.userapp = userapp;
+  }
+
   public Userapp getUserappSession() {
     return this.userappSession;
+  }
+
+  public void setUserappSession(Userapp userapp) {
+    this.userappSession = userapp;
   }
 
   public DataSource getDataSource() {
@@ -64,11 +72,11 @@ public class UsuarioBean implements java.io.Serializable {
 
   public boolean isSessionStarted() {
 	  return true;
-    /*try {
+    try {
       return this.userapp.getUserappname() != null && this.userapp.getPassword() != null && this.getSessionCustomMap().get("userapp") != null;
     } catch(Exception e) {
       return false;
-    }*/
+    }
   }
 
   public String encriptarMD5(String password) throws Exception{
@@ -85,22 +93,23 @@ public class UsuarioBean implements java.io.Serializable {
     }
   }
 
+  public void startSessionData(Userapp userapp) {
+    this.userapp = null;
+    this.userappSession = userapp;
+    this.getSessionCustomMap().put("userapp",userapp);
+    this.showPage("/inicio/inicioSistema");
+  }
+
   public void startSession() {
     try {
       this.userapp.setUserappname(this.userapp.getUserappname().trim());
       this.userapp.setPassword(this.userapp.getPassword().trim());
-      Userapp userFound = (Userapp) this.dataSource.consultarObjeto("SELECT userapp FROM Userapp userapp WHERE userapp.username = ''");
+      Userapp userFound = (Userapp) this.dataSource.consultarObjeto("SELECT userapp FROM Userapp userapp WHERE userapp.username = '" + this.userapp.getUserappname() + "'");
       if(userFound != null) {
         if(!userFound.getPassword().equals(this.encriptarMD5(this.userapp.getPassword()))) {
           this.userapp.setPassword(null);
           this.sendMessage(null,"Clave incorrecta","error");
-        } else {
-          this.userapp = null;
-          this.userappSession = userFound;
-          this.getSessionCustomMap().put("userapp",this.userappSession);
-          this.showPage("/inicio/inicioSistema");
-        }
-
+        } else startSessionData(userFound);
       } else {
         this.userapp.setPassword(null);
         this.sendMessage(null,"Usuario no encontrado","error");
@@ -114,6 +123,7 @@ public class UsuarioBean implements java.io.Serializable {
   public void closeSession() {
     try {
       FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+      this.showPage("login/login");
     } catch(Exception e) {
       this.sendMessage(null,"No se puede cerrar la sesión. " + e.getMessage(),"fatal");
     }

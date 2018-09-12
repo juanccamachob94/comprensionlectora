@@ -1,0 +1,46 @@
+body {
+  background: url(../imgs/background.jpg) no-repeat;
+  background-size: cover;
+  font-size: 12px;
+  font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+  margin: 10px;
+  padding:10px;
+}
+
+a:link, a:visited {
+  font-weight : bold;
+  text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+  text-decoration : underline;
+}
+
+#top {
+    position: relative;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+#bottom {
+    position: relative;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#left {
+    float: left;
+    padding: 5px;
+    width: 25%;
+}
+
+#right {
+    float: right;
+    padding: 5px;
+    width: 70%;
+}
+
+
+.centrado {
+  margin: auto;
+}

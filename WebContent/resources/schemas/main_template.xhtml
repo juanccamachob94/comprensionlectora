@@ -7,22 +7,84 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:juan="juan/facelets">
-
+      xmlns:cl="comprensionlectora/facelets">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>Comprensión lectora</title>
     </h:head>
 
     <h:body>
-    	Hola, soy la plantilla<br/>
-		<ui:insert name="content"/>
-		<br/>
-		Mensaje final de la plantilla	
-		<h:outputScript library="javax.faces" name="jsf.js" target="head"/>
-		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
-		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
-		<h:outputScript name="./js/main.js"/>
+        <f:event type="preRenderView" listener="#{generalVistaBean.denegarAcceso()}"/>
+        <div id="top">
+          <h:graphicImage value="#{generalBean.saltosDirec}../resources/imgs/navbar.png" width="100%"/>
+          <br/>
+          <h:form>
+            <p:menu>
+              <cl:menu itemsmenu="#{menuBean.itemsmenugroup1}"/>
+              <f:facet name="options">
+                  <p:commandButton icon="ui-icon-extlink" value="Cerrar sesión" process="@this" update="@this" actionListener="#{usuarioBean.closeSession()}"/>
+              </f:facet>
+            </p:menu>
+          </h:form>
+        </div>
+        <div>
+            <div id="left">
+              <div class="perfil">
+                <p:panel id="pPerfil" header="Información del usuario" toggleable="true" closable="false" toggleSpeed="500" style="margin-bottom:20px">
+                <h5>Hola, #{usuarioBean.userapp.name} #{usuarioBean.userapp.lastname}</h5>
+                <img src="../resources/imgs/users/#{usuarioBean.userappSession.picture}" width="70%"/>
+                <i class="fa fa-fw fa-#{usuarioBean.userapp.sex eq 'M' : 'mars':'venus'}"></i>
+                Exámenes presentados: #{testBean.examenesPresentados}
+                Puntos obtenidos: #{testBean.puntosObtenidos}
+                <br/>
+                </p:panel>
+              </div>
+              <div class="misblogs">
+                <p:panel id="pMisBlogs" header="Mis blogs" toggleable="true" toggleSpeed="500" style="margin-bottom:20px">
+              		<p:tree value="#{menuBean.rootMisBlogs}" var="itemTree">
+              			<p:treeNode type="blog" expandedIcon="ui-icon-document" collapsedIcon="ui-icon-document">
+              				<a href="#">#{itemTree.title}</a>
+              			</p:treeNode>
+                    <p:treeNode type="month" expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+                      <h:outputText value="#{itemTree}"/>
+              			</p:treeNode>
+                    <p:treeNode type="year" expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+                      <h:outputText value="#{itemTree}"/>
+              			</p:treeNode>
+                    <p:treeNode type="raiz" expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+                      <h:outputText value="#{itemTree}"/>
+              			</p:treeNode>
+              		</p:tree>
+                </p:panel>
+              </div>
+              <div class="ultimos_blogs">
+                <p:panel id="pUltimosBlogs" header="Información del usuario" toggleable="true" closable="false" toggleSpeed="500" style="margin-bottom:20px">
+                <ui:repeat value="#{blogBean.ultimosBlogs}" var="blog" varStatus="estadoBlog">
+                  <div class="ultimoblog">
+                    <p:panel header="#{blog.title}">
+                      <p style="text-align:justify">#{generalBean.subCadena(blog.description,100)}</p>
+                      <a href="#">#{blog.userapp.name} #{blog.userapp.lastname}</a>
+                    </p:panel>
+                  </div>
+                </ui:repeat>
+                </p:panel>
+              </div>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content"></ui:insert>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">
+              Colegio...
+            </ui:insert>
+        </div>
+        <h:outputScript library="javax.faces" name="jsf.js" target="head"/>
+    		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
+    		<h:outputScript name="./js/main.js"/>
     </h:body>
 
 </html>
