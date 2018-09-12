@@ -21,7 +21,7 @@ public class Userapp  implements java.io.Serializable {
      private String password;
      private Set userappQuestions = new HashSet(0);
      private Set comments = new HashSet(0);
-     private Set posts = new HashSet(0);
+     private Set blogs = new HashSet(0);
 
     public Userapp() {
     }
@@ -36,7 +36,7 @@ public class Userapp  implements java.io.Serializable {
         this.sex = sex;
         this.password = password;
     }
-    public Userapp(int id, String userappname, String name, String lastname, String email, String picture, char sex, String password, Set userappQuestions, Set comments, Set posts) {
+    public Userapp(int id, String userappname, String name, String lastname, String email, String picture, char sex, String password, Set userappQuestions, Set comments, Set blogs) {
        this.id = id;
        this.userappname = userappname;
        this.name = name;
@@ -47,7 +47,7 @@ public class Userapp  implements java.io.Serializable {
        this.password = password;
        this.userappQuestions = userappQuestions;
        this.comments = comments;
-       this.posts = posts;
+       this.blogs = blogs;
     }
    
     public int getId() {
@@ -120,12 +120,12 @@ public class Userapp  implements java.io.Serializable {
     public void setComments(Set comments) {
         this.comments = comments;
     }
-    public Set getPosts() {
-        return this.posts;
+    public Set getBlogs() {
+        return this.blogs;
     }
     
-    public void setPosts(Set posts) {
-        this.posts = posts;
+    public void setBlogs(Set blogs) {
+        this.blogs = blogs;
     }
 
 

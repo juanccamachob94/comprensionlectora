@@ -12,17 +12,28 @@
       xmlns:cl="comprensionlectora/facelets"
       template="../../resources/schemas/main_template.xhtml">
       <ui:define name="content">
-        <p:dataTable id="dataTableBlogs" value="#{blogBean.pUltimosBlogs}" var="blog" style="width:97%">
-          <p:columnGroup>
-            <p:row>
-              <p:column headerText="Blogs publicados"/>
-            </p:row>
-            <p:column>
-              <p:panel header="Información del usuario" toggleable="true" toggleSpeed="500">
-                
-              </p:panel>
-            </p:column>
-          </p:columnGroup>
-        </p:dataTable>
+        <h:form id="formBlogs">
+          <p:outputLabel id="totalBlogs" value="#{blogBean.numRegistros} casos encontrados"/>
+          <p:dataTable id="dataTableBlogs" value="#{blogBean.datos}" var="blog" style="width:97%" emptyMessage="Aún no se registran blogs">
+            <cl:encabezadoPaginador bean="#{blogBean}"/>
+            <p:columnGroup>
+              <p:row>
+                <p:column headerText="Blogs publicados"/>
+              </p:row>
+              <p:column>
+                <p:panel header="#{blog.title}" toggleable="true" toggleSpeed="500">
+                  <p style="text-align:justify">#{blog.description}</p>
+                  <div class="enlaces">
+                    <a href="#" style="float:left">#{blog.userapp.name} #{blog.userapp.lastname}</a>
+                    <a href="#" style="float:right">Ver más</a>
+                  </div>
+                </p:panel>
+              </p:column>
+            </p:columnGroup>
+            <cl:piePaginador bean="#{blogBean}"/>
+          </p:dataTable>
+          <cl:paginador id="pagBlogs" bean="#{blogBean}" formulario="formBlogs" tabla="dataTableBlogs"/>
+          <cl:cargando nombre="bloqueoListaBlogs" bloqueo="formBlogs"/>
+        </h:form>
     </ui:define>
 </ui:composition>

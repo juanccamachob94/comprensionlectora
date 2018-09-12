@@ -6,7 +6,7 @@
     <class name="mx.com.juan.camacho.entidadesdb.Userapp" table="userapp" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="userappname" type="string">
             <column name="userappname" length="30" not-null="true" />
@@ -41,11 +41,11 @@
             </key>
             <one-to-many class="mx.com.juan.camacho.entidadesdb.Comment" />
         </set>
-        <set name="posts" table="post" inverse="true" lazy="true" fetch="select">
+        <set name="blogs" table="blog" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="author_userapp_id" not-null="true" />
             </key>
-            <one-to-many class="mx.com.juan.camacho.entidadesdb.Post" />
+            <one-to-many class="mx.com.juan.camacho.entidadesdb.Blog" />
         </set>
     </class>
 </hibernate-mapping>

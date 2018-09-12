@@ -6,13 +6,13 @@
     <class name="mx.com.juan.camacho.entidadesdb.Comment" table="comment" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="comment" class="mx.com.juan.camacho.entidadesdb.Comment" fetch="select">
             <column name="comment_id" />
         </many-to-one>
-        <many-to-one name="post" class="mx.com.juan.camacho.entidadesdb.Post" fetch="select">
-            <column name="post_id" />
+        <many-to-one name="blog" class="mx.com.juan.camacho.entidadesdb.Blog" fetch="select">
+            <column name="blog_id" />
         </many-to-one>
         <many-to-one name="userapp" class="mx.com.juan.camacho.entidadesdb.Userapp" fetch="select">
             <column name="author_userapp_id" not-null="true" />

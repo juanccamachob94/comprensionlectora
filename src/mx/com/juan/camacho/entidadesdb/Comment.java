@@ -14,7 +14,7 @@ public class Comment  implements java.io.Serializable {
 
      private int id;
      private Comment comment;
-     private Post post;
+     private Blog blog;
      private Userapp userapp;
      private String content;
      private Date FCreate;
@@ -30,10 +30,10 @@ public class Comment  implements java.io.Serializable {
         this.content = content;
         this.FCreate = FCreate;
     }
-    public Comment(int id, Comment comment, Post post, Userapp userapp, String content, Date FCreate, Set comments) {
+    public Comment(int id, Comment comment, Blog blog, Userapp userapp, String content, Date FCreate, Set comments) {
        this.id = id;
        this.comment = comment;
-       this.post = post;
+       this.blog = blog;
        this.userapp = userapp;
        this.content = content;
        this.FCreate = FCreate;
@@ -54,12 +54,12 @@ public class Comment  implements java.io.Serializable {
     public void setComment(Comment comment) {
         this.comment = comment;
     }
-    public Post getPost() {
-        return this.post;
+    public Blog getBlog() {
+        return this.blog;
     }
     
-    public void setPost(Post post) {
-        this.post = post;
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
     public Userapp getUserapp() {
         return this.userapp;

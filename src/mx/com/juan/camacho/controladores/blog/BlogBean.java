@@ -2,33 +2,41 @@ package mx.com.juan.camacho.controladores.blog;
 
 import javax.faces.bean.ManagedBean;
 import jaxax.faces.bean.ViewScoped;
-import mx.com.juan.camacho.beans.GeneralVistaBean;
+import mx.com.juan.camacho.beans.DBBean;
 import java.util.List;
-import mx.com.juan.camacho.entidadesdb.Post;
+import mx.com.juan.camacho.entidadesdb.Blog;
 import java.util.List;
 import mx.com.juan.camacho.utilitaria.Utilitaria;
 
 @ManagedBean
 @ViewScoped
-public class BlogBean extends GeneralVistaBean {
+public class BlogBean extends DBean<Blog> {
 
   private DefaultTreeNode rootMisBlogs;
 
-  private void addPost(TreeNode nodoMonth, int year, int idMonth) {
-    List<Post> posts = this.dataSource.consultarLista("SELECT post FROM Post post WHERE date_part('YEAR',CURRENT_DATE) = " + year + " AND date_part('MONTH',CURRENT_DATE) = " + (idMonth + 1) + " AND post.userapp.id =" this.usuarioBean.getNewUserapp().getId() + " ORDER BY post.FCreate DESC");
-    int numPosts = posts.size();
-    for(int i = 0; i < numPosts; i++) new DefaultTreeNode("blog",post[i],nodoMonth);
+  public BlogBean() {
+    this.rootMisBlogs = null;
+    this.select = "SELECT blog ";
+    this.form = "FROM Blog blog ";
+    this.order = "ORDER BY blog.FCreate DESC ";
+    this.id = "blog.id ";
+  }
+
+  private void addBlog(TreeNode nodoMonth, int year, int idMonth) {
+    List<Blog> blogs = this.dataSource.consultarLista("SELECT blog FROM Blog blog WHERE date_part('YEAR',CURRENT_DATE) = " + year + " AND date_part('MONTH',CURRENT_DATE) = " + (idMonth + 1) + " AND blog.userapp.id =" this.usuarioBean.getNewUserapp().getId() + " ORDER BY blog.FCreate DESC");
+    int numBlogs = blogs.size();
+    for(int i = 0; i < numBlogs; i++) new DefaultTreeNode("blog",blog[i],nodoMonth);
   }
 
   private void addMonth(TreeNode nodoYear, int idMonth) {
     TreeNode nodoMonth = new DefaultTreeNode("month",Utilitaria.obtenerNombreMes(idMonth),nodoYear);
-    addPost(nodoMonth,(Integer)nodoYear.getData(),idMonth);
+    addBlog(nodoMonth,(Integer)nodoYear.getData(),idMonth);
     if(nodoMonth.getChildCount() == 0) nodoMonth.getChildren().remove(nodoMonth);
   }
 
 
   private void addYear(TreeNode raiz, int year) {
-    if(this.dataSource.contar("SELECT COUNT(post) FROM Post post WHERE date_part('YEAR',CURRENT_DATE) = " + year + " AND post.userapp.id =" this.usuarioBean.getNewUserapp().getId()) > 0) {
+    if(this.dataSource.contar("SELECT COUNT(blog) FROM Blog blog WHERE date_part('YEAR',CURRENT_DATE) = " + year + " AND blog.userapp.id =" this.usuarioBean.getNewUserapp().getId()) > 0) {
       TreeNode nodoYear = new DefaultTreeNode("year",year,raiz);
       for(int idMonth = 0; idMonth <=11; idMonth++) addMonth(nodoYear,idMonth);
       if(nodoYear.getChildCount() == 0) raiz.getChildren().remove(nodoYear);
@@ -48,13 +56,11 @@ public class BlogBean extends GeneralVistaBean {
 		return this.rootMisBlogs;
 	}
 
-  public BlogBean() {
-    this.rootMisBlogs = null;
-  }
 
-  public List<Post> getUltimosBlogs() {
+
+  public List<Blog> getUltimosBlogs() {
     try {
-      return this.dataSource.consultarLista("SELECT post FROM Post post ORDER BY post.FCreate DESC",5);
+      return this.dataSource.consultarLista("SELECT blog FROM Blog blog ORDER BY blog.FCreate DESC",5);
     } catch(Exception e) {
       return null;
     }

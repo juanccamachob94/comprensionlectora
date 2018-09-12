@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:cl="comprensionlectora/facelets"
+      template="../../resources/schemas/main_template.xhtml">
+      <ui:define name="content">
+      <h1>Nuevo blog</h1>
+      <h:form id="formNewBlog">
+
+        <p:commandLink id="vistaPrevia" value="Vista previa" actionListener="#{newBlogBean.actualizar()}" process="@form" update="modalVistaPrevia" oncomplete="PF('modalVP').show();" style="float:right"/>
+
+        <h:panelGrid id="pgRegister" cellpadding="5" columns="3">
+
+          <f:facet>
+            <p:messages id="msgs"/>
+          </f:facet>
+
+          <p:outputLabel for="title" value="Título:"/>
+          <p:inputText id="title" value="#{newBlogBean.newblog.title}" required="true" requiredMessage="El título del blog es requerido"/>
+          <p:message for="title" display="tooltip"/>
+
+          <p:outputLabel for="description" value="Descripción:"/>
+          <p:inputTextarea id="description" rows="7" style="width:100%" required="true" requiredMessage="La descripción es obligatoria"/>
+          <p:message for="description" display="tooltip"/>
+
+          <p:outputLabel for="content" value="Contenido:"/>
+          <p:textEditor widgetVar="content" value="#{newBlogBean.newblog.content}" height="500px" style="margin-bottom:10px" required="true" requiredMessage="El blog debe tener un contenido"/>
+          <p:message for="content" display="tooltip"/>
+
+        </h:panelGrid>
+
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+        <p:commandButton id="btnPublicar" value="Publicar" actionListener="#{newBlogBean.crearBlog()}" process="@form" update="@form" onstart="mostrarCargando('bloqueoNewBlog')" oncomplete="ocultarCargando('bloqueoNewBlog')"/>
+
+        <cl:cargando nombre="bloqueoNewBlog" bloqueo="formNewBlog"/>
+        <p:confirm header="Confirmación" message="¿Está seguro de publicar el blog?"/>
+
+      </h:form>
+
+      <p:dialog id="modalVistaPrevia" header="Vista previa" widgetVar="modalVP" modal="true" height="70%" width="75%">
+        <h1>#{newBlogBean.newblog.title}</h1>
+        <p style="text-align:justify">#{newBlogBean.newblog.description}</p>
+        <p:outputText value="#{newBlogBean.newblog.content}"/>
+        <p:button value="Cerrar" style="float:right" onclick="PF('modalVP').close();"/>
+      </p:dialog>
+    </ui:define>
+</ui:composition>
