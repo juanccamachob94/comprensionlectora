@@ -2,19 +2,20 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.connection.driver_class">org.bloggresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:bloggresql://localhost:5432/comprensionlectora</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/comprensionlectora</property>
     <property name="hibernate.connection.username">user_comprension_lectora</property>
     <property name="hibernate.connection.password">comprensionlectora</property>
-    <property name="hibernate.dialect">org.hibernate.dialect.BloggreSQL82Dialect</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
     <property name="hibernate.show_sql">false</property>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Menu.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/TestContent.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Userapp.hbm.xml"/>
+    <mapping resource="mx/com/juan/camacho/entidadesdb/Post.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Blog.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Test.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Comment.hbm.xml"/>
-    <mapping resource="mx/com/juan/camacho/entidadesdb/Question.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/UserappQuestion.hbm.xml"/>
+    <mapping resource="mx/com/juan/camacho/entidadesdb/Question.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

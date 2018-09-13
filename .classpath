@@ -8,8 +8,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/Servers/Tomcat v8.5 Server at localhost-config"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/antlr-2.7.7.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/bluesky-1.0.10.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/c3p0-0.9.2.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ehcache-core-2.4.3.jar"/>
@@ -33,6 +33,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-6.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-simple-1.6.1.jar"/>
-	<classpathentry kind="lib" path="/Servers/Tomcat v8.5 Server at localhost-config"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/bootstrap-1.0.10.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

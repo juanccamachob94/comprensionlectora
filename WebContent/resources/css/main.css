@@ -10,6 +10,14 @@ label {
 	font-weight:100!important;
 }
 
+.btn-primary {
+	background-color: #0171AB !important;
+}
+#top .ui-icon:hover {
+	color: white !important;
+}
+
+
 .logo {
 	border: 5px solid #757575;
     border-radius: 5px;
@@ -17,6 +25,24 @@ label {
 }
 .logo:hover {
 	box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.ui-confirm-dialog {
+	top:300 !important;	
+}
+
+.ui-panel-titlebar {
+background-color: #0171AB !important;
+color: white !important;
+}
+
+
+
+#content {
+	border-radius: 4px;
+	background-color: #FFF;
+	padding: 5px;
+	border: 1px solid #dddddd;
 }
 
 a:link, a:visited {
@@ -42,14 +68,29 @@ a:link:hover, a:visited:hover  {
 
 #left {
     float: left;
-    padding: 5px;
-    width: 25%;
+    width: 20%;
+    margin:0;
 }
 
-#right {
+.titulo {
+	font-size: 18px;	
+}
+.panel-titulo {
+	padding: 10px;
+}
+
+.ui-tree {
+	max-width:100%;
+}
+
+#content {
     float: right;
-    padding: 5px;
-    width: 70%;
+    width: 80%;
+}
+
+#left img {
+	border-radius: 50%;
+	border: solid 2px #757575;
 }
 
 
@@ -57,19 +98,22 @@ a:link:hover, a:visited:hover  {
   margin: auto;
 }
 
-html, body {
-	height: 93%;
+.corte {
+	clear:both;
+}
 
+#top .ui-menuitem-link {
+	padding-right: 10px;
 }
 
 #contenido {
-	padding: 2em;
+	margin:10px 20px;
+	padding: 1em;
 	background: #BDBDBD;
 	opacity: 0.95;
 	filter: alpha(opacity=95);
 	border-radius: 5px;
 	box-shadow: 5px 5px 5px #757575;
-	min-height:100%;
   	background: -webkit-linear-gradient(to right, #FFFFFF, #BDBDBD);
   	background: linear-gradient(to right, #FFFFFF, #BDBDBD);
 

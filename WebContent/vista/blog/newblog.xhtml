@@ -15,44 +15,39 @@
       <h1>Nuevo blog</h1>
       <h:form id="formNewBlog">
 
-        <p:commandLink id="vistaPrevia" value="Vista previa" actionListener="#{newBlogBean.actualizar()}" process="@form" update="modalVistaPrevia" oncomplete="PF('modalVP').show();" style="float:right"/>
-
+        
+        <p:messages id="messages" showDetail="true" closable="true"/>
         <h:panelGrid id="pgRegister" cellpadding="5" columns="3">
-
-          <f:facet>
-            <p:messages id="msgs"/>
-          </f:facet>
 
           <p:outputLabel for="title" value="Título:"/>
           <p:inputText id="title" value="#{newBlogBean.newblog.title}" required="true" requiredMessage="El título del blog es requerido"/>
-          <p:message for="title" display="tooltip"/>
+          <p:message for="title"/>
 
           <p:outputLabel for="description" value="Descripción:"/>
-          <p:inputTextarea id="description" rows="7" style="width:100%" required="true" requiredMessage="La descripción es obligatoria"/>
-          <p:message for="description" display="tooltip"/>
+          <p:inputTextarea id="description" value="#{newBlogBean.newblog.description}" rows="7" style="width:100%" required="true" requiredMessage="La descripción es obligatoria" maxlength="900"/>
+          <p:message for="description"/>
 
-          <p:outputLabel for="content" value="Contenido:"/>
-          <p:textEditor widgetVar="content" value="#{newBlogBean.newblog.content}" height="500px" style="margin-bottom:10px" required="true" requiredMessage="El blog debe tener un contenido"/>
-          <p:message for="content" display="tooltip"/>
+          <p:outputLabel for="content2" value="Contenido:"/>
+          <p:textEditor id="content2" value="#{newBlogBean.newblog.content}" height="700" style="margin-bottom:10px" required="true" requiredMessage="El blog debe tener un contenido"/>
+          <p:message for="content2"/>
+
+        <center>
+	        <p:commandButton id="btnPublicar" class="btnPublicar btn btn-primary btn-lg" style="width:300px" value="Publicar" actionListener="#{newBlogBean.crearBlog()}" process="@form" update="@form" onstart="mostrarCargando('bloqueoNewBlog')" oncomplete="ocultarCargando('bloqueoNewBlog')">
+	        	<p:confirm header="Confirmación" message="¿Está seguro de publicar el blog?"/>
+	        </p:commandButton>
+        </center>
 
         </h:panelGrid>
-
-        <p:messages id="messages" showDetail="true" closable="true">
-            <p:autoUpdate/>
-        </p:messages>
-
-        <p:commandButton id="btnPublicar" value="Publicar" actionListener="#{newBlogBean.crearBlog()}" process="@form" update="@form" onstart="mostrarCargando('bloqueoNewBlog')" oncomplete="ocultarCargando('bloqueoNewBlog')"/>
-
         <cl:cargando nombre="bloqueoNewBlog" bloqueo="formNewBlog"/>
-        <p:confirm header="Confirmación" message="¿Está seguro de publicar el blog?"/>
+        <cl:confirmacion/>
 
       </h:form>
 
-      <p:dialog id="modalVistaPrevia" header="Vista previa" widgetVar="modalVP" modal="true" height="70%" width="75%">
+      <p:dialog id="modalVistaPrevia" header="Vista previa" widgetVar="modalVP" modal="true" height="70%" width="75%" appendTo="@(body)">
         <h1>#{newBlogBean.newblog.title}</h1>
         <p style="text-align:justify">#{newBlogBean.newblog.description}</p>
-        <p:outputText value="#{newBlogBean.newblog.content}"/>
-        <p:button value="Cerrar" style="float:right" onclick="PF('modalVP').close();"/>
+        <h:outputText value="#{newBlogBean.newblog.content}"/>
+        <p:button value="Cerrar" style="float:right" onclick="ocultar('modalVP');"/>
       </p:dialog>
     </ui:define>
 </ui:composition>

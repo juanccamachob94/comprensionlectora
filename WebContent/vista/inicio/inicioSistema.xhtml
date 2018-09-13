@@ -12,9 +12,13 @@
       xmlns:cl="comprensionlectora/facelets"
       template="../../resources/schemas/main_template.xhtml">
       <ui:define name="content">
+      	<div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all panel-titulo">
+      	<span class="ui-panel-title titulo">Blogs publicados</span>
+      	</div>
         <h:form id="formBlogs">
-          <p:outputLabel id="totalBlogs" value="#{blogBean.numRegistros} casos encontrados"/>
-          <p:dataTable id="dataTableBlogs" value="#{blogBean.datos}" var="blog" style="width:97%" emptyMessage="Aún no se registran blogs">
+          <br/>
+          <p:outputLabel id="totalBlogs" value="Blogs publicados a la fecha: #{blogBean.numRegistros}"/>
+          <p:dataTable id="dataTableBlogs" value="#{blogBean.datos}" var="blog" emptyMessage="Aún no se registran blogs">
             <cl:encabezadoPaginador bean="#{blogBean}"/>
             <p:columnGroup>
               <p:row>

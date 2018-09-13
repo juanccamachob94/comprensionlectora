@@ -11,11 +11,11 @@ public class NewBlogBean extends GeneralVistaBean {
 
   private Blog newblog;
 
-  public Blog getNewBlog() {
+  public Blog getNewblog() {
     return this.newblog;
   }
 
-  public void setNewBlog(Blog newblog) {
+  public void setNewblog(Blog newblog) {
     this.newblog = newblog;
   }
 
@@ -26,11 +26,12 @@ public class NewBlogBean extends GeneralVistaBean {
   public void crearBlog() {
     try {
       this.newblog.setUserapp(this.usuarioBean.getUserappSession());
+      this.newblog.setFCreate(new java.util.Date());
       this.dataSource.insertar(this.newblog);
       this.newblog = null;
       this.mostrarPagina("inicio/inicioSistema");
     } catch(Exception e) {
-      this.enviarMensaje(null,"No se pudo crear el blog","fatal");
+      this.enviarMensaje(null,"No se pudo crear el blog. " + e.getMessage(),"fatal");
     }
   }
 }

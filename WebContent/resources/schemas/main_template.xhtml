@@ -10,7 +10,8 @@
       xmlns:cl="comprensionlectora/facelets">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        
+        <meta name="viewport" content="width=device-width"/>
+        <h:outputStylesheet name="./css/main.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
         <title>Comprensión lectora</title>
     </h:head>
@@ -22,29 +23,33 @@
           <h:graphicImage value="#{generalBean.saltosDirec}../resources/imgs/navbar.png" width="100%"/>
           <br/>
           <h:form>
-            <p:menu>
+            <p:menubar>
               <cl:menu itemsmenu="#{menuBean.itemsmenugroup1}"/>
               <f:facet name="options">
-                  <p:commandButton icon="ui-icon-extlink" value="Cerrar sesión" process="@this" update="@this" actionListener="#{usuarioBean.closeSession()}"/>
+                  <h:commandButton class="btn btn-primary" value="Cerrar sesión" action="#{usuarioBean.closeSession()}" style="margin-right:-16px"/>
               </f:facet>
-            </p:menu>
+            </p:menubar>
           </h:form>
         </div>
         <div>
             <div id="left">
+            <ui:insert name="left">
               <div class="perfil">
                 <p:panel id="pPerfil" header="Información del usuario" toggleable="true" closable="false" toggleSpeed="500" style="margin-bottom:20px">
-                <h5>Hola, #{usuarioBean.userapp.name} #{usuarioBean.userapp.lastname}</h5>
-                <img src="../resources/imgs/users/#{usuarioBean.userappSession.picture}" width="70%"/>
-                <i class="fa fa-fw fa-#{usuarioBean.userapp.sex eq 'M' : 'mars':'venus'}"></i>
+                <center>
+                <h5>Hola, #{usuarioBean.userappSession.name} #{usuarioBean.userappSession.lastname}</h5>
+                <img src="#{generalBean.saltosDirec}../resources/imgs/users/#{empty usuarioBean.userappSession.picture? 'basic.png' : usuarioBean.userappSession.picture}" width="70%"/>
+                </center>
+                <div class="corte"/>
                 Exámenes presentados: #{testBean.examenesPresentados}
+                <div class="corte"/>
                 Puntos obtenidos: #{testBean.puntosObtenidos}
                 <br/>
                 </p:panel>
               </div>
               <div class="misblogs">
                 <p:panel id="pMisBlogs" header="Mis blogs" toggleable="true" toggleSpeed="500" style="margin-bottom:20px">
-              		<p:tree value="#{menuBean.rootMisBlogs}" var="itemTree">
+              		<p:tree value="#{blogBean.rootMisBlogs}" var="itemTree">
               			<p:treeNode type="blog" expandedIcon="ui-icon-document" collapsedIcon="ui-icon-document">
               				<a href="#">#{itemTree.title}</a>
               			</p:treeNode>
@@ -72,11 +77,16 @@
                 </ui:repeat>
                 </p:panel>
               </div>
+              </ui:insert>
             </div>
-            <div id="content" class="left_content">
-                <ui:insert name="content"></ui:insert>
+            <div id="content">
+                <ui:insert name="content">
+                
+                </ui:insert>
             </div>
+            <div class="corte"/>
         </div>
+        <div class="corte"/>
         <div id="bottom">
             <ui:insert name="bottom">
               Colegio...
@@ -86,6 +96,7 @@
     		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
     		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
     		<h:outputScript name="./js/main.js"/>
+    		<div class="corte"/>
     		</div>
     </h:body>
 

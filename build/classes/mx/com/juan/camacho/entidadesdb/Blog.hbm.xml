@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/09/2018 12:51:42 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 12/09/2018 04:55:27 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="mx.com.juan.camacho.entidadesdb.Blog" table="blog" schema="public" optimistic-lock="version">
         <id name="id" type="int">
@@ -15,22 +15,25 @@
             <column name="title" length="500" not-null="true" />
         </property>
         <property name="FCreate" type="timestamp">
-            <column name="f_create" length="29" not-null="true" />
+            <column name="f_create" length="29" />
         </property>
         <property name="description" type="string">
-            <column name="description" not-null="true" />
+            <column name="description" length="100" not-null="true" />
         </property>
-        <set name="comments" table="comment" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="blog_id" />
-            </key>
-            <one-to-many class="mx.com.juan.camacho.entidadesdb.Comment" />
-        </set>
+        <property name="content" type="string">
+            <column name="content" not-null="true" />
+        </property>
         <set name="tests" table="test" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="blog_id" not-null="true" />
             </key>
             <one-to-many class="mx.com.juan.camacho.entidadesdb.Test" />
+        </set>
+        <set name="comments" table="comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="blog_id" />
+            </key>
+            <one-to-many class="mx.com.juan.camacho.entidadesdb.Comment" />
         </set>
     </class>
 </hibernate-mapping>

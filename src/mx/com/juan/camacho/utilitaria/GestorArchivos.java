@@ -45,7 +45,7 @@ public class GestorArchivos {
             out.flush();
             out.close();
         } catch (Exception e) {
-            throw new Exception("Error al crear el archivo " + archivoSubido.getFileName());
+            throw new Exception("Error al crear el archivo " + archivoSubido.getFileName() + ". " + e.getMessage());
         }
     }
 }

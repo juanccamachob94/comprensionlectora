@@ -12,6 +12,8 @@ import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+
+import org.primefaces.PrimeFaces;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -210,6 +212,10 @@ public class GeneralBean implements java.io.Serializable {
      */
     protected void ejecutarJS(String funcion) {
         RequestContext.getCurrentInstance().execute(funcion + "()");
+    }
+    
+    protected void ejecutarJS2(String funcion) {
+    	PrimeFaces.current().executeScript(funcion);
     }
 
     /**

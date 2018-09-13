@@ -1,5 +1,5 @@
 package mx.com.juan.camacho.entidadesdb;
-// Generated 10/09/2018 12:51:41 PM by Hibernate Tools 4.3.1
+// Generated 12/09/2018 04:55:26 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,8 +13,8 @@ public class Comment  implements java.io.Serializable {
 
 
      private int id;
-     private Comment comment;
      private Blog blog;
+     private Comment comment;
      private Userapp userapp;
      private String content;
      private Date FCreate;
@@ -30,10 +30,10 @@ public class Comment  implements java.io.Serializable {
         this.content = content;
         this.FCreate = FCreate;
     }
-    public Comment(int id, Comment comment, Blog blog, Userapp userapp, String content, Date FCreate, Set comments) {
+    public Comment(int id, Blog blog, Comment comment, Userapp userapp, String content, Date FCreate, Set comments) {
        this.id = id;
-       this.comment = comment;
        this.blog = blog;
+       this.comment = comment;
        this.userapp = userapp;
        this.content = content;
        this.FCreate = FCreate;
@@ -47,19 +47,19 @@ public class Comment  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    public Comment getComment() {
-        return this.comment;
-    }
-    
-    public void setComment(Comment comment) {
-        this.comment = comment;
-    }
     public Blog getBlog() {
         return this.blog;
     }
     
     public void setBlog(Blog blog) {
         this.blog = blog;
+    }
+    public Comment getComment() {
+        return this.comment;
+    }
+    
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
     public Userapp getUserapp() {
         return this.userapp;

@@ -72,7 +72,7 @@ public class UsuarioBean implements java.io.Serializable {
 
   public boolean isSessionStarted() {
     try {
-      return this.userapp.getUserappname() != null && this.userapp.getPassword() != null && this.getSessionCustomMap().get("userapp") != null;
+      return this.userappSession.getUserappname() != null && this.userappSession.getPassword() != null && this.getSessionCustomMap().get("userapp") != null;
     } catch(Exception e) {
       return false;
     }
@@ -101,9 +101,8 @@ public class UsuarioBean implements java.io.Serializable {
 
   public void startSession() {
     try {
-      this.userapp.setUserappname(this.userapp.getUserappname().trim());
-      this.userapp.setPassword(this.userapp.getPassword().trim());
-      Userapp userFound = (Userapp) this.dataSource.consultarObjeto("SELECT userapp FROM Userapp userapp WHERE userapp.username = '" + this.userapp.getUserappname() + "'");
+      this.userapp.setUserappname(this.userapp.getUserappname().toLowerCase().trim());
+      Userapp userFound = (Userapp) this.dataSource.consultarObjeto("SELECT userapp FROM Userapp userapp WHERE userapp.userappname = '" + this.userapp.getUserappname() + "'");
       if(userFound != null) {
         if(!userFound.getPassword().equals(this.encriptarMD5(this.userapp.getPassword()))) {
           this.userapp.setPassword(null);

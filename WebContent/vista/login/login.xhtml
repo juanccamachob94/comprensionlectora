@@ -20,7 +20,7 @@
         <title>Comprensión lectora</title>
     </h:head>
     <h:body>
-    	<div id="contenido">
+    	<div id="contenido" style="margin-top:50px">
     	<f:event type="preRenderView" listener="#{generalVistaBean.permitirAcceso()}"/>
         <f:metadata>
             <f:viewAction action="#{usuarioBean.cargarUsuario()}"/>
@@ -30,9 +30,9 @@
 	    	<center>
 	    		<h:graphicImage class="logo" value="#{generalBean.saltosDirec}../resources/imgs/logo.jpg" width="269px"/>
 	    	</center>
-		    <h5 style="text-align:center;">
+		    <h4 style="text-align:center;">
 	        Bienvenido al sistema de comprensión lectora en el que podrás participar en la comunidad con contenidos de cada uno de sus integrantes. Podrás leer y crear tus propios documentos de cualquier tema de interé y además podrás realizar evaluaciones o presentar evaluaciones que otros hayan publicado para identificar tu nivel de comprensión lectora.
-		    </h5>
+		    </h4>
 	    	<br/>
 	    	<!-- Panel de inicio de sesión -->
 	    	<p:panel id="panelIniciarSesion" class="panelIniciarSesion" header="Inicio de sesión" style="margin-bottom:2px">

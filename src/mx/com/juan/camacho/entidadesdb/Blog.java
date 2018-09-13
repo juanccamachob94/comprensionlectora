@@ -1,5 +1,5 @@
 package mx.com.juan.camacho.entidadesdb;
-// Generated 10/09/2018 12:51:41 PM by Hibernate Tools 4.3.1
+// Generated 12/09/2018 04:55:26 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -17,28 +17,31 @@ public class Blog  implements java.io.Serializable {
      private String title;
      private Date FCreate;
      private String description;
-     private Set comments = new HashSet(0);
+     private String content;
      private Set tests = new HashSet(0);
+     private Set comments = new HashSet(0);
 
     public Blog() {
     }
 
 	
-    public Blog(int id, Userapp userapp, String title, Date FCreate, String description) {
+    public Blog(int id, Userapp userapp, String title, Date FCreate, String description, String content) {
         this.id = id;
         this.userapp = userapp;
         this.title = title;
         this.FCreate = FCreate;
         this.description = description;
+        this.content = content;
     }
-    public Blog(int id, Userapp userapp, String title, Date FCreate, String description, Set comments, Set tests) {
+    public Blog(int id, Userapp userapp, String title, Date FCreate, String description, String content, Set tests, Set comments) {
        this.id = id;
        this.userapp = userapp;
        this.title = title;
        this.FCreate = FCreate;
        this.description = description;
-       this.comments = comments;
+       this.content = content;
        this.tests = tests;
+       this.comments = comments;
     }
    
     public int getId() {
@@ -76,12 +79,12 @@ public class Blog  implements java.io.Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Set getComments() {
-        return this.comments;
+    public String getContent() {
+        return this.content;
     }
     
-    public void setComments(Set comments) {
-        this.comments = comments;
+    public void setContent(String content) {
+        this.content = content;
     }
     public Set getTests() {
         return this.tests;
@@ -89,6 +92,13 @@ public class Blog  implements java.io.Serializable {
     
     public void setTests(Set tests) {
         this.tests = tests;
+    }
+    public Set getComments() {
+        return this.comments;
+    }
+    
+    public void setComments(Set comments) {
+        this.comments = comments;
     }
 
 

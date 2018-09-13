@@ -1,5 +1,5 @@
 package mx.com.juan.camacho.entidadesdb;
-// Generated 10/09/2018 12:51:41 PM by Hibernate Tools 4.3.1
+// Generated 12/09/2018 04:55:26 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -20,8 +20,8 @@ public class Userapp  implements java.io.Serializable {
      private char sex;
      private String password;
      private Set userappQuestions = new HashSet(0);
-     private Set comments = new HashSet(0);
      private Set blogs = new HashSet(0);
+     private Set comments = new HashSet(0);
 
     public Userapp() {
     }
@@ -36,7 +36,7 @@ public class Userapp  implements java.io.Serializable {
         this.sex = sex;
         this.password = password;
     }
-    public Userapp(int id, String userappname, String name, String lastname, String email, String picture, char sex, String password, Set userappQuestions, Set comments, Set blogs) {
+    public Userapp(int id, String userappname, String name, String lastname, String email, String picture, char sex, String password, Set userappQuestions, Set blogs, Set comments) {
        this.id = id;
        this.userappname = userappname;
        this.name = name;
@@ -46,8 +46,8 @@ public class Userapp  implements java.io.Serializable {
        this.sex = sex;
        this.password = password;
        this.userappQuestions = userappQuestions;
-       this.comments = comments;
        this.blogs = blogs;
+       this.comments = comments;
     }
    
     public int getId() {
@@ -113,19 +113,19 @@ public class Userapp  implements java.io.Serializable {
     public void setUserappQuestions(Set userappQuestions) {
         this.userappQuestions = userappQuestions;
     }
-    public Set getComments() {
-        return this.comments;
-    }
-    
-    public void setComments(Set comments) {
-        this.comments = comments;
-    }
     public Set getBlogs() {
         return this.blogs;
     }
     
     public void setBlogs(Set blogs) {
         this.blogs = blogs;
+    }
+    public Set getComments() {
+        return this.comments;
+    }
+    
+    public void setComments(Set comments) {
+        this.comments = comments;
     }
 
 

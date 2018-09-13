@@ -1,5 +1,5 @@
 package mx.com.juan.camacho.entidadesdb;
-// Generated 10/09/2018 12:51:41 PM by Hibernate Tools 4.3.1
+// Generated 12/09/2018 04:55:26 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -15,79 +15,69 @@ public class Test  implements java.io.Serializable {
      private int id;
      private Blog blog;
      private String name;
-     private String content;
      private Date FCreate;
-     private Set testContents = new HashSet(0);
+     private String content;
      private Set questions = new HashSet(0);
 
     public Test() {
     }
 
-
-    public Test(int id, Blog blog, String name, String content, Date FCreate) {
+	
+    public Test(int id, Blog blog, String name, Date FCreate, String content) {
         this.id = id;
         this.blog = blog;
         this.name = name;
         this.FCreate = FCreate;
         this.content = content;
     }
-    public Test(int id, Blog blog, String name, String content, Date FCreate, Set testContents, Set questions) {
+    public Test(int id, Blog blog, String name, Date FCreate, String content, Set questions) {
        this.id = id;
        this.blog = blog;
        this.name = name;
        this.FCreate = FCreate;
-       this.testContents = testContents;
-       this.questions = questions;
        this.content = content;
+       this.questions = questions;
     }
-
-    public String getContent() {
-      return this.content;
-    }
-
-    public void setContent(String content) {
-      this.content = content;
-    }
-
+   
     public int getId() {
         return this.id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
     public Blog getBlog() {
         return this.blog;
     }
-
+    
     public void setBlog(Blog blog) {
         this.blog = blog;
     }
     public String getName() {
         return this.name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
     public Date getFCreate() {
         return this.FCreate;
     }
-
+    
     public void setFCreate(Date FCreate) {
         this.FCreate = FCreate;
     }
-    public Set getTestContents() {
-        return this.testContents;
+    public String getContent() {
+        return this.content;
     }
-
-    public void setTestContents(Set testContents) {
-        this.testContents = testContents;
+    
+    public void setContent(String content) {
+        this.content = content;
     }
     public Set getQuestions() {
         return this.questions;
     }
-
+    
     public void setQuestions(Set questions) {
         this.questions = questions;
     }
@@ -96,3 +86,5 @@ public class Test  implements java.io.Serializable {
 
 
 }
+
+
