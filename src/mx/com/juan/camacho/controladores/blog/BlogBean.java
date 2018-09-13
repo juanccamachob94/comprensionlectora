@@ -43,7 +43,7 @@ public class BlogBean extends mx.com.juan.camacho.beans.DBBean<Blog> {
   private void addMonth(TreeNode nodoYear, int idMonth) throws Exception {
     TreeNode nodoMonth = new DefaultTreeNode("month",Utilitaria.obtenerNombreMes(idMonth),nodoYear);
     addBlog(nodoMonth,(Integer)nodoYear.getData(),idMonth);
-    if(nodoMonth.getChildCount() == 0) nodoMonth.getChildren().remove(nodoMonth);
+    if(nodoMonth.getChildCount() == 0) nodoYear.getChildren().remove(nodoMonth);
   }
 
 

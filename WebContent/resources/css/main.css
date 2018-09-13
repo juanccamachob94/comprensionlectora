@@ -131,8 +131,8 @@ a:link:hover, a:visited:hover  {
 	margin:10px 20px;
 	padding: 1em;
 	background: #BDBDBD;
-	opacity: 0.95;
-	filter: alpha(opacity=95);
+	opacity: 0.97;
+	filter: alpha(opacity=97);
 	border-radius: 5px;
 	box-shadow: 5px 5px 5px #757575;
   	background: -webkit-linear-gradient(to right, #FFFFFF, #BDBDBD);
