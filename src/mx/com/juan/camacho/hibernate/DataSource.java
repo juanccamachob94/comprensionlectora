@@ -1,5 +1,6 @@
 package mx.com.juan.camacho.hibernate;
 
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -166,7 +167,7 @@ public class DataSource implements java.io.Serializable {
     public int contarQ(String query) throws Exception {
         try {
             if(this.esUnicaTransaccion()) this.sesion = this.sesion == null || !this.mismaSesion ? getHibernateUtil().getSessionFactory().openSession() : this.sesion;
-            return ((Integer)this.sesion.createSQLQuery(query).uniqueResult()).intValue();
+            return ((BigInteger)this.sesion.createSQLQuery(query).uniqueResult()).intValue();
         }catch(Exception e) {
         	if(!this.esUnicaTransaccion()) this.revertirTransaccion();
         	String mensaje = e.getMessage();
@@ -199,7 +200,7 @@ public class DataSource implements java.io.Serializable {
             if(this.esUnicaTransaccion()) this.sesion = this.sesion == null || !this.mismaSesion ? getHibernateUtil().getSessionFactory().openSession() : this.sesion;
             Query miQuery = this.sesion.createSQLQuery(query);
             for(Atributo atr : atributos) miQuery.setParameter(atr.getNombre(),atr.getValor());
-            return ((Integer)miQuery.uniqueResult()).intValue();
+            return ((BigInteger)miQuery.uniqueResult()).intValue();
         }catch(Exception e) {
         	if(!this.esUnicaTransaccion()) this.revertirTransaccion();
         	String mensaje = e.getMessage();

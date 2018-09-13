@@ -13,17 +13,17 @@
       template="../../resources/schemas/main_template.xhtml">
       <ui:define name="content">
       	<div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all panel-titulo">
-      	<span class="ui-panel-title titulo">Blogs publicados</span>
+      	<span class="ui-panel-title titulo">Blogs publicados (#{blogBean.numRegistros})</span>
       	</div>
         <h:form id="formBlogs">
           <br/>
-          <p:outputLabel id="totalBlogs" value="Blogs publicados a la fecha: #{blogBean.numRegistros}"/>
           <p:dataTable id="dataTableBlogs" value="#{blogBean.datos}" var="blog" emptyMessage="Aún no se registran blogs">
             <cl:encabezadoPaginador bean="#{blogBean}"/>
-            <p:columnGroup>
+            <p:columnGroup type="header">
               <p:row>
                 <p:column headerText="Blogs publicados"/>
               </p:row>
+            </p:columnGroup>
               <p:column>
                 <p:panel header="#{blog.title}" toggleable="true" toggleSpeed="500">
                   <p style="text-align:justify">#{blog.description}</p>
@@ -31,13 +31,14 @@
                     <a href="#" style="float:left">#{blog.userapp.name} #{blog.userapp.lastname}</a>
                     <a href="#" style="float:right">Ver más</a>
                   </div>
+                  <div class="corte"/>
                 </p:panel>
               </p:column>
-            </p:columnGroup>
             <cl:piePaginador bean="#{blogBean}"/>
           </p:dataTable>
           <cl:paginador id="pagBlogs" bean="#{blogBean}" formulario="formBlogs" tabla="dataTableBlogs"/>
           <cl:cargando nombre="bloqueoListaBlogs" bloqueo="formBlogs"/>
         </h:form>
+
     </ui:define>
 </ui:composition>

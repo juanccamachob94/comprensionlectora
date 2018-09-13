@@ -69,6 +69,16 @@ public class GeneralBean implements java.io.Serializable {
 	public void setDataSource(DataSource dataSource) {
             this.dataSource = dataSource;
 	}
+	
+	public int getCantidad() {
+		try {
+			return this.dataSource.contarQ("SELECT COUNT(*) FROM BLOG");
+		} catch(Exception e) {
+			System.out.println("FALLA2 " + e.getMessage());
+			return 0;
+		}
+	}
+	
 
     /**
      * Permite mostrar una respuesta a un

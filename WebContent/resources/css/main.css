@@ -17,6 +17,21 @@ label {
 	color: white !important;
 }
 
+#formNewBlog > table {
+	width: 100%;
+}
+#formNewBlog > table td {
+	display:block;
+}
+
+#contenido_pagina a {
+	color: #448AFF !important;
+	font-weight:100!important;
+}
+.ui-tree {
+	border: none !important;
+}
+
 
 .logo {
 	border: 5px solid #757575;
@@ -30,10 +45,16 @@ label {
 .ui-confirm-dialog {
 	top:300 !important;	
 }
+.ui-column-title {
+	text-shadow:none !important;
+}
 
-.ui-panel-titlebar {
+.ui-panel-titlebar, .ui-widget-header, .ui-datatable-tablewrapper .ui-state-default {
 background-color: #0171AB !important;
 color: white !important;
+}
+.ui-state-default {
+	background-image: none !important;
 }
 
 

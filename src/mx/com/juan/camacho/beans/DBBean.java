@@ -25,7 +25,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
     protected String id = " ";
     protected int idMax = -1;
     protected int idMin = -1;
-    protected int numRegistrosPorPagina = 15;
+    protected int numRegistrosPorPagina = 10;
     protected int numRegistros;
     protected T objBusqueda;
 
@@ -76,21 +76,42 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
 
     @SuppressWarnings("unchecked")
     public List<T> getDatos() {
+    	System.out.println("A");
             this.limpiarQuery();
+            System.out.println("B");
             List<Integer> lista;
+            System.out.println("C");
             try {
+            	System.out.println("D");
+            	
                     if(this.idMax == -1 && this.idMin == -1) {//Condiciones iniciales de la consulta
+                    	System.out.println("E");
                             if(!this.order.toLowerCase().contains("desc")) {
+                            	System.out.println("F");
                                     lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + this.order,numRegistrosPorPagina,this.atributosQuery);
+                                    System.out.println("G");
                                     this.idMax = lista.get(lista.size() - 1);
+                                    System.out.println("H");
                                     this.idMin = (Integer)this.dataSource.consultarObjeto("SELECT MIN(" + this.id + ") " + this.from + this.where,this.atributosQuery);
+                                    System.out.println("I");
                             } else {
+                            	System.out.println("J");
+                            	
+                            	System.out.println("dataSource " + dataSource);
+                            	System.out.println("cadena " + "SELECT MAX(" + this.id + ") " + this.from + this.where);
+                            	System.out.println("atributos " + atributosQuery);
+                            	
                                     this.idMax = (Integer)this.dataSource.consultarObjeto("SELECT MAX(" + this.id + ") " + this.from + this.where,this.atributosQuery);
+                                    System.out.println("K");
                                     lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + this.order,numRegistrosPorPagina,this.atributosQuery);
+                                    System.out.println("L");
                                     this.idMin = lista.get(lista.size() - 1);
+                                    System.out.println("M");
                             }
                     }
+                    System.out.println("N");
                     if(!this.datosCargados) hacerBackupQuery();
+                    System.out.println("O");
                     return this.dataSource.consultarLista((this.select + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + comparacion(this.where + "where",this.id,this.idMin,false) + this.order).replaceAll("  "," ").replaceAll("  "," "),this.numRegistrosPorPagina,this.atributosQuery);
             } catch(java.lang.ArrayIndexOutOfBoundsException aiex) {
                     return null;

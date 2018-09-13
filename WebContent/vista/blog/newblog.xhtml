@@ -22,13 +22,19 @@
           <p:outputLabel for="title" value="Título:"/>
           <p:inputText id="title" value="#{newBlogBean.newblog.title}" required="true" requiredMessage="El título del blog es requerido"/>
           <p:message for="title"/>
-
+          
           <p:outputLabel for="description" value="Descripción:"/>
-          <p:inputTextarea id="description" value="#{newBlogBean.newblog.description}" rows="7" style="width:100%" required="true" requiredMessage="La descripción es obligatoria" maxlength="900"/>
+          <h:panelGroup>
+          	<p:inputTextarea id="description" value="#{newBlogBean.newblog.description}" rows="7" style="width:100%" required="true" requiredMessage="La descripción es obligatoria" maxlength="300" counter="contadorDescription" counterTemplate="Quedan {0} caracteres" autoResize="false" />
+          	<h:outputText id="contadorDescription"/>
+          	
+          </h:panelGroup>
           <p:message for="description"/>
 
+          
+
           <p:outputLabel for="content2" value="Contenido:"/>
-          <p:textEditor id="content2" value="#{newBlogBean.newblog.content}" height="700" style="margin-bottom:10px" required="true" requiredMessage="El blog debe tener un contenido"/>
+          <p:textEditor id="content2" value="#{newBlogBean.newblog.content}" height="700" style="margin-top:15px; margin-bottom:10px" required="true" requiredMessage="El blog debe tener un contenido"/>
           <p:message for="content2"/>
 
         <center>

@@ -1,22 +1,17 @@
 package mx.com.juan.camacho.controladores.blog;
 
 import javax.faces.bean.ManagedBean;
-
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
-
 import javax.faces.bean.ViewScoped;
-import mx.com.juan.camacho.beans.DBBean;
-
 import java.util.Calendar;
 import java.util.List;
 import mx.com.juan.camacho.entidadesdb.Blog;
-import java.util.List;
 import mx.com.juan.camacho.utilitaria.Utilitaria;
 
 @ManagedBean
 @ViewScoped
-public class BlogBean extends DBBean<Blog> {
+public class BlogBean extends mx.com.juan.camacho.beans.DBBean<Blog> {
 
   private DefaultTreeNode rootMisBlogs;
 
@@ -24,8 +19,19 @@ public class BlogBean extends DBBean<Blog> {
     this.rootMisBlogs = null;
     this.select = "SELECT blog ";
     this.from = "FROM Blog blog ";
-    this.order = "ORDER BY blog.FCreate DESC ";
+    this.order = "ORDER BY blog.id DESC ";
     this.id = "blog.id ";
+    
+  }
+  
+  public int getCantidad() {
+	  try {
+		  System.out.println("DATASO " + this.getDatos());
+		  return this.dataSource.contarQ("SELECT COUNT(*) FROM BLOG");
+	  } catch(Exception e) {
+		  System.out.println("ERROR DETECTADO " + e.getMessage());
+		  return -150;
+	  }
   }
 
   private void addBlog(TreeNode nodoMonth, int year, int idMonth) throws Exception {
