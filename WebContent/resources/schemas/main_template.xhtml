@@ -26,7 +26,7 @@
             <p:menubar>
               <cl:menu itemsmenu="#{menuBean.itemsmenugroup1}"/>
               <f:facet name="options">
-                  <h:commandButton class="btn btn-primary" value="Cerrar sesión" action="#{usuarioBean.closeSession()}" style="margin-right:-16px"/>
+                  <p:commandButton class="btn btn-primary" value="Cerrar sesión" action="#{usuarioBean.closeSession()}" style="margin-right:-16px"/>
               </f:facet>
             </p:menubar>
           </h:form>
@@ -49,9 +49,9 @@
               </div>
               <div class="misblogs">
                 <p:panel id="pMisBlogs" header="Mis blogs" toggleable="true" toggleSpeed="500" style="margin-bottom:20px">
-              		<p:tree value="#{blogBean.rootMisBlogs}" var="itemTree">
+              		<p:tree value="#{blogBean.rootMisBlogs}" var="itemTree" varStatus="variable">
               			<p:treeNode type="blog" expandedIcon="ui-icon-document" collapsedIcon="ui-icon-document">
-              				<a href="#">#{itemTree.title}</a>
+                      		<cl:enlace id="algoarbolpersonalunico" valor="#{itemTree.title}" transaccion="blog/viewblog" atributo1="idBlog" valor1="#{itemTree.id}"/>
               			</p:treeNode>
                     <p:treeNode type="month" expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
                       <h:outputText value="#{itemTree}"/>
@@ -71,7 +71,14 @@
                   <div class="ultimoblog">
                     <p:panel header="#{blog.title}">
                       <p style="text-align:justify">#{generalBean.subCadena(blog.description,100)}</p>
-                      <a href="#">#{blog.userapp.name} #{blog.userapp.lastname}</a>
+                      <h:panelGroup style="font-size:0.8em;float:right">
+                      	<cl:enlace valor="Ver" id="verblogultimosblog" transaccion="blog/viewblog" atributo1="idBlog" valor1="#{blog.id}"/>
+                      </h:panelGroup>
+                      <div class="corte"/>
+                      <h:panelGroup style="font-size:0.8em;float:right">
+                        <cl:enlace id="nombreautor" valor="#{blog.userapp.name} #{blog.userapp.lastname}" transaccion="userapp/viewuserapp" atributo1="idUserapp" valor1="#{blog.userapp.id}"/>
+                      </h:panelGroup>
+                      <div class="corte"/>
                     </p:panel>
                   </div>
                 </ui:repeat>
@@ -81,7 +88,7 @@
             </div>
             <div id="content">
                 <ui:insert name="content">
-                
+
                 </ui:insert>
             </div>
             <div class="corte"/>

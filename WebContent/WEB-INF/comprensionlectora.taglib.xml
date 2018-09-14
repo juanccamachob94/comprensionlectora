@@ -7,8 +7,16 @@
 		<source>menu.xhtml</source>
 	</tag>
 	<tag>
+		<tag-name>enlace</tag-name>
+		<source>enlace.xhtml</source>
+	</tag>
+	<tag>
 		<tag-name>encabezadoPaginador</tag-name>
 		<source>encabezadoPaginador.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>enlaceIcono</tag-name>
+		<source>enlaceIcono.xhtml</source>
 	</tag>
 	<tag>
 		<tag-name>paginador</tag-name>

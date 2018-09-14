@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:cl="comprensionlectora/facelets"
+      template="../../resources/schemas/main_template.xhtml">
+      <ui:define name="content">
+      <f:metadata>
+          <f:viewParam name="idBlog" value="#{viewBlogBean.idBlog}"/>
+      </f:metadata>
+      <h1>#{viewBlogBean.blog.title}</h1>
+      <h4>Fecha de publicación: #{viewBlogBean.blog.FCreate}</h4>
+      <h5>Autor: #{viewBlogBean.blog.userapp.name} #{viewBlogBean.blog.userapp.lastname}</h5>
+      <div class="linea corte"/>
+      <h3>Descripción:</h3>
+      <p style="text-align:justify">#{viewBlogBean.blog.description}</p>
+      <br/>
+      <h3>Contenido:</h3>
+      <h:outputText value="#{viewBlogBean.blog.content}" escape="false"/>
+    </ui:define>
+</ui:composition>

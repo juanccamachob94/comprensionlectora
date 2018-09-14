@@ -65,7 +65,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
 
     public int getPaginaFinal() {
             try {
-            		if(this.numRegistros == 0) getNumRegistros();
+            		getNumRegistros();
                     this.paginaFinal = (int)((double)(((double) this.numRegistros) / ((double)this.numRegistrosPorPagina)) + 0.9999);
                     if(this.paginaFinal == 0) this.paginaFinal = 1;
             } catch(Exception e) {
@@ -122,6 +122,23 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
                             this.atributosQuery.add((Atributo)valor);
                     }
                     if(!compCadenaValor.equals("")) this.where = this.where + (this.where.toLowerCase().contains("where") ? "AND " : "WHERE ") + atributo + compCadenaValor + " ";
+            }
+    }
+
+    protected void agregarOpcion(String atributo, Object valor, String comparacion) {
+            if(comparacion == null) comparacion = "=";
+            boolean exacto = !comparacion.equals("LIKE");
+            if(valor != null && !valor.toString().equals("")) {
+                    String compCadenaValor = "";
+                    if(valor instanceof String) compCadenaValor = " " + comparacion + " " + "'" + (exacto? "":"%") + (String)valor + (exacto? "":"%") + "'";
+                    else if(valor instanceof Boolean) compCadenaValor = " = " + (((Boolean)valor).booleanValue()?"true":"false");
+                    else if(valor instanceof Integer) compCadenaValor = " " + comparacion + " " +Integer.toString((Integer) valor);
+                    else if(valor instanceof Double) compCadenaValor = " " + comparacion + " " + Double.toString((Double) valor);
+                    else if(valor instanceof Atributo && ((Atributo) valor).getValor() != null && !((Atributo) valor).getValor().toString().equals("")) {
+                            compCadenaValor = " " + comparacion + " " + (exacto? "":"%") +":" + ((Atributo)valor).getNombre() + (exacto? "":"%");
+                            this.atributosQuery.add((Atributo)valor);
+                    }
+                    if(!compCadenaValor.equals("")) this.where = this.where + (this.where.toLowerCase().contains("where") ? "OR " : "WHERE ") + atributo + compCadenaValor + " ";
             }
     }
 

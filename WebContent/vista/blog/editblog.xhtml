@@ -12,20 +12,23 @@
       xmlns:cl="comprensionlectora/facelets"
       template="../../resources/schemas/main_template.xhtml">
       <ui:define name="content">
-      <h1>Nuevo blog</h1>
-      <h:form id="formNewBlog">
+      <f:metadata>
+          <f:viewParam name="idBlog" value="#{editBlogBean.idBlog}"/>
+      </f:metadata>
+      <h1>Edición del blog #{editBlogBean.editblog.id}</h1>
+      <h:form id="formEditBlog">
 
 
         <p:messages id="messages" showDetail="true" closable="true"/>
         <h:panelGrid id="pgRegister" cellpadding="5" columns="3">
 
           <p:outputLabel for="title" value="Título:"/>
-          <p:inputText id="title" value="#{newBlogBean.newblog.title}" required="true" requiredMessage="El título del blog es requerido"/>
+          <p:inputText id="title" value="#{editBlogBean.editblog.title}" required="true" requiredMessage="El título del blog es requerido"/>
           <p:message for="title"/>
 
           <p:outputLabel for="description" value="Descripción:"/>
           <h:panelGroup>
-          	<p:inputTextarea id="description" value="#{newBlogBean.newblog.description}" rows="7" style="width:100%" required="true" requiredMessage="La descripción es obligatoria" maxlength="300" counter="contadorDescription" counterTemplate="Quedan {0} caracteres" autoResize="false" />
+          	<p:inputTextarea id="description" value="#{editBlogBean.editblog.description}" rows="7" style="width:100%" required="true" requiredMessage="La descripción es obligatoria" maxlength="300" counter="contadorDescription" counterTemplate="Quedan {0} caracteres" autoResize="false" />
           	<h:outputText id="contadorDescription"/>
 
           </h:panelGroup>
@@ -34,17 +37,17 @@
 
 
           <p:outputLabel for="content2" value="Contenido:"/>
-          <p:textEditor id="content2" value="#{newBlogBean.newblog.content}" height="700" style="margin-top:15px; margin-bottom:10px" required="true" requiredMessage="El blog debe tener un contenido"/>
+          <p:textEditor id="content2" value="#{editBlogBean.editblog.content}" height="700" style="margin-top:15px; margin-bottom:10px" required="true" requiredMessage="El blog debe tener un contenido"/>
           <p:message for="content2"/>
 
         <center>
-	        <p:commandButton id="btnPublicar" class="btnPublicar btn btn-primary btn-lg" style="width:300px" value="Publicar" actionListener="#{newBlogBean.crearBlog()}" process="@form" update="@form" onstart="mostrarCargando('bloqueoNewBlog')" oncomplete="ocultarCargando('bloqueoNewBlog')">
-	        	<p:confirm header="Confirmación" message="¿Está seguro de publicar el blog?"/>
+	        <p:commandButton id="btnPublicar" class="btnPublicar btn btn-primary btn-lg" style="width:300px" value="Guardar cambios" actionListener="#{editBlogBean.editarBlog()}" process="@form" update="@form" onstart="mostrarCargando('bloqueoEditBlog')" oncomplete="ocultarCargando('bloqueoEditBlog')">
+	        	<p:confirm header="Confirmación" message="¿Está seguro de editar el blog?"/>
 	        </p:commandButton>
         </center>
 
         </h:panelGrid>
-        <cl:cargando nombre="bloqueoNewBlog" bloqueo="formNewBlog"/>
+        <cl:cargando nombre="bloqueoEditBlog" bloqueo="formEditBlog"/>
         <cl:confirmacion/>
 
       </h:form>

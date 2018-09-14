@@ -14,6 +14,21 @@ import mx.com.juan.camacho.utilitaria.Utilitaria;
 public class BlogBean extends mx.com.juan.camacho.beans.DBBean<Blog> {
 
   private DefaultTreeNode rootMisBlogs;
+  private String busqueda;
+
+  public String getBusqueda() {
+    return this.busqueda;
+  }
+
+  public void setBusqueda(String busqueda) {
+    this.busqueda = busqueda;
+  }
+
+  @Override
+  public void asignarParametrosConsulta() {
+    this.agregarOpcion("blog.title",this.busqueda,"LIKE");
+    this.agregarOpcion("blog.description",this.busqueda,"LIKE");
+  }
 
   public BlogBean() {
     this.rootMisBlogs = null;
@@ -21,17 +36,7 @@ public class BlogBean extends mx.com.juan.camacho.beans.DBBean<Blog> {
     this.from = "FROM Blog blog ";
     this.order = "ORDER BY blog.id DESC ";
     this.id = "blog.id ";
-    
-  }
-  
-  public int getCantidad() {
-	  try {
-		  System.out.println("DATASO " + this.getDatos());
-		  return this.dataSource.contarQ("SELECT COUNT(*) FROM BLOG");
-	  } catch(Exception e) {
-		  System.out.println("ERROR DETECTADO " + e.getMessage());
-		  return -150;
-	  }
+
   }
 
   private void addBlog(TreeNode nodoMonth, int year, int idMonth) throws Exception {
