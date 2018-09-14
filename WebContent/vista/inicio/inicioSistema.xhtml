@@ -17,12 +17,12 @@
       	</div>
         <div class="busquedablogs">
           <h:form id="formBusqueda">
-            <h4 style="display:inline-block">Búsqueda:</h4>
-            <div class="busqueda" style="width:75%;display:inline-block">
+            <h4 style="width:10%;display:inline-block">Búsqueda:</h4>
+            <div class="busqueda" style="width:80%;display:inline-block">
               <p:inputText value="#{blogBean.busqueda}" style="width:100%"/>
             </div>
-            <div class="btnBusqueda" style="display:inline-block">
-              <p:commandButton onstart="mostrarCargando('bloqueoListaBlogs')" oncomplete="ocultarCargando('bloqueoListaBlogs')" value="Buscar" actionListener="#{blogBean.consultar()}" process="formBusqueda" update=":formBlogs" class="btn btn-primary"/>
+            <div class="btnBusqueda" style="width:7%;display:inline-block">
+              <p:commandButton onstart="mostrarCargando('bloqueoListaBlogs')" style="width:100%" oncomplete="ocultarCargando('bloqueoListaBlogs')" value="Buscar" actionListener="#{blogBean.consultar()}" process="formBusqueda" update=":formBlogs" class="btn btn-primary"/>
             </div>
           </h:form>
         </div>

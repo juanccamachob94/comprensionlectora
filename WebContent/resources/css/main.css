@@ -14,7 +14,7 @@ label {
 	color:white;
 	font-weight: 300;
 	font-size: 1.1em;
-	border: 1px solid #757575;
+	border: 1px solid #066697;
     border-radius: 10px;
 }
 .ui-button {
@@ -22,6 +22,8 @@ label {
 	color:white !important;
 	background-color: #0171AB !important;
 	background-image: none !important;
+	padding-top: 2px !important;
+	padding-bottom: 2px !important;
 }
 
 .btn-primary {

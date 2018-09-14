@@ -25,7 +25,7 @@
       <h3>Publicaciones:</h3>
       <p:tree value="#{viewUserappBean.rootBlogs}" var="itemTree">
         <p:treeNode type="blog" expandedIcon="ui-icon-document" collapsedIcon="ui-icon-document">
-          <a href="#">#{itemTree.title}</a>
+          <cl:enlace id="algoarbolpersonalunico2" valor="#{itemTree.title}" transaccion="blog/viewblog" atributo1="idBlog" valor1="#{itemTree.id}"/>
           <cl:enlace id="blogparaver" transaccion="blog/viewblog" atributo1="idBlog" valor1="#{itemTree.id}"/>
         </p:treeNode>
         <p:treeNode type="month" expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
