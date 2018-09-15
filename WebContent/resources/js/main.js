@@ -54,7 +54,7 @@ function ocultar(p) {
 
 
 $( document ).ready(function() {
-	('#left img').css('max-height',('#left img').width());
+	$('#left img').css('max-height',$('#left img').width());
 });
 
 

@@ -30,13 +30,9 @@
           <br/>
           <p:dataTable id="dataTableBlogs" value="#{blogBean.datos}" var="blog" emptyMessage="Aún no se registran blogs">
             <cl:encabezadoPaginador bean="#{blogBean}"/>
-            <p:columnGroup type="header">
-              <p:row>
-                <p:column headerText="Blogs publicados"/>
-              </p:row>
-            </p:columnGroup>
+
               <p:column>
-                <p:panel header="#{blog.title}" toggleable="true" toggleSpeed="500">
+                <p:panel header="#{blog.title}" toggleable="true" toggleSpeed="500" style="margin-bottom:20px">
                   <p style="text-align:justify">#{blog.description}</p>
                   <div class="enlaces">
                     <h:panelGroup style="float:left;font-size:0.8em">
@@ -49,7 +45,6 @@
                   <div class="corte"/>
                 </p:panel>
               </p:column>
-            <cl:piePaginador bean="#{blogBean}"/>
           </p:dataTable>
           <cl:paginador id="pagBlogs" bean="#{blogBean}" formulario="formBlogs" tabla="dataTableBlogs"/>
           <cl:cargando nombre="bloqueoListaBlogs" bloqueo="formBlogs"/>

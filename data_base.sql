@@ -104,7 +104,4 @@ INSERT INTO MENU (ID,MENU_ID,NAME,PAGE,ICON,GROUP_ID,POSITION)VALUES
 (1,NULL,'Inicio','inicio/inicioSistema','home',1,1),
 (2,NULL,'Blogs',null,'document',1,2),
 (3,2,'Nuevo blog','blog/newblog','newwin',2,1),
-(4,2,'Mis blogs','blog/misblogs','document-b',2,2),
-(5,NULL,'Evaluaciones',null,'copy',1,3),
-(6,5,'Presentadas','test/submitted','pencil',3,1),
-(7,5,'Creadas','test/created','search',3,2);
+(4,2,'Mis blogs','blog/misblogs','document-b',2,2);
