@@ -30,13 +30,6 @@ public class DiagramBean {
         return ThreadLocalRandom.current().nextInt(min, max);
     }
     public void setConcepts(List<String> concepts) {
-    	this.concepts = concepts;
-    	int c = concepts.size();
-    	for(int i = 0; i < c; i++) this.agregarElemento(this.model, concepts.get(i),Integer.toString(getRandom(200,400)),Integer.toString(getRandom(200,400)), "#fff000");
-    }
-    
-    @PostConstruct
-    public void init(){
         this.model = new DefaultDiagramModel();
         this.model.setMaxConnections(-1);
         this.model.getDefaultConnectionOverlays().add(new ArrowOverlay(20, 20, 1, 1));
@@ -44,6 +37,9 @@ public class DiagramBean {
         connector.setPaintStyle("{strokeStyle:'#EE6E73', lineWidth:3}");
         connector.setHoverPaintStyle("{strokeStyle:'red'}");
         this.model.setDefaultConnector(connector);
+    	this.concepts = concepts;
+    	int c = concepts.size();
+    	for(int i = 0; i < c; i++) this.agregarElemento(this.model, concepts.get(i),Integer.toString(getRandom(200,400)),Integer.toString(getRandom(200,400)), "#fff000");
     }
     
     private DotEndPoint createDotEndPoint(EndPointAnchor anchor, String color) {

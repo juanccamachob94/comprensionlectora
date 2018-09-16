@@ -12,17 +12,30 @@
       xmlns:cl="comprensionlectora/facelets"
       template="../../resources/schemas/main_template.xhtml">
       <ui:define name="content">
-<p:diagram value="#{diagramBean.model}" style="height:100%;width:100%" styleClass="ui-widget-content" />
+<p:diagram value="#{diagramBean.model}" style="height:100%;width:100%" styleClass="ui-widget-content otracosa" />
  
  
 <style type="text/css">
     .ui-diagram-element {
-        border:0.1em dotted #d4e06b;    
-        width:14em; 
-        height:4em;     
+        border:0.1em solid #FCEB01;
+        background-color: white;    
+        width:14em;
         line-height:4em;
         text-align: center;
     }
 </style>
+<img src="" id="img" />
+<h:outputScript name="./js/html2canvas.min.js"/>
+  <script>
+  function juan(){ 
+	    html2canvas($('.otracosa').get(0)).then(function (canvas) {
+	        var base64encodedstring = canvas.toDataURL("image/jpeg", 1);
+	        $('#img').attr('src', base64encodedstring);
+	      });	  
+	  
+  }
+
+  </script>
+
     </ui:define>
 </ui:composition>
