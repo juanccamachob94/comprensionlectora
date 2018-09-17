@@ -40,8 +40,8 @@ public class ViewBlogBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
 
   public void seleccionarTexto() {
 	  if(this.textoSeleccionado != null && !this.textoSeleccionado.trim().equals("") && !this.textoSeleccionado.contains("style=\"background-color:yellow\"") || (this.textoSeleccionado.contains("style=\"background-color:yellow\"") && !this.textoSeleccionado.contains("</span>"))) {
-		  this.content = this.content.replace("><","> <");
-		  Matcher mTexto = Pattern.compile("([^\\>\\<]+(?=((\\<[^\\>\\<]+\\>)|(\\<\\/[^\\>\\<]+\\>))))|(?<=\\>)\\s(?=\\<)").matcher(this.content);
+		  //this.content = this.content.replace("><","> <");
+		  Matcher mTexto = Pattern.compile("([^\\>\\<]+(?=((\\<[^\\>\\<]+\\>)|(\\<\\/[^\\>\\<]+\\>))))|(?<=\\>)(^.)*(?=\\<)").matcher(this.content);
 		  Matcher mEtiquetas = Pattern.compile("(\\<[^\\>\\<]+\\>)|(\\<\\/[^\\>\\<]+\\>)").matcher(this.content);
 		  List<String> matchesTexto = new ArrayList<String>();
 		  List<String> matchesEtiquetas = new ArrayList<String>();
@@ -56,7 +56,7 @@ public class ViewBlogBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
 		  if(tx <= tl) cadena = cadena + matchesEtiquetas.get(tl - 1);
 		  else cadena = cadena + matchesTexto.get(tx -1);
 		  this.content = cadena;
-		  this.content = this.content.replace("> <","><");
+		  //this.content = this.content.replace("> <","><");
 		  this.concepts.add(this.textoSeleccionado);
 	  }
 		  
