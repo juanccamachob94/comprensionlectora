@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:cl="comprensionlectora/facelets"
+      template="../../resources/schemas/main_template.xhtml">
+      <ui:define name="content">
+<script language="JavaScript">
+    window.onbeforeunload = confirmExit;
+    function confirmExit() {
+        return "You have attempted to leave this page. Are you sure?";
+    }
+</script>
+      <f:metadata>
+          <f:viewParam name="idBlog" value="#{newTestBean.idBlog}"/>
+      </f:metadata>
+      <h:form id="formNewTest">
+        <h1>Nuevo examen para el blog #{newTestBean.newtest.blog.title}</h1>
+        <h:panelGroup id="pgNewTest">
+          <p:messages id="messagesTest" showDetail="true" closable="true"/>
+          <p:outputLabel for="name" value="Nombre:" style="display:block"/>
+          <p:inputText id="name" value="#{newTestBean.newtest.name}" required="true" requiredMessage="El nombre del examen es obligatorio"  style="display:block"/>
+          <p:message for="name" style="display:block"/>
+          <p:commandButton value="Publicar examen" style="margin-left:auto;display:flex;" actionListener="#{newTestBean.publicarExamen()}" update="pgNewTest" process="pgNewTest"/>
+        </h:panelGroup>
+		<br/>
+        <div class="linea"/>
+        <h2>Preguntas:</h2>
+        <h4>Recuerda que cada examen debe tener un total de 100 puntos distribuidos en un número ilimitado de preguntas.</h4>
+        <h:panelGroup id="pgPreguntas">
+	        <ui:repeat id="preguntas" value="#{newTestBean.questions}" var="newquestion" varStatus="status">
+	          
+	          
+            <span>
+            <span><span style="font-size:2.5em;font-weight:bold">Pregunta #{(status.index + 1)}.</span><span> #{newquestion.points} puntos</span></span>
+            
+            <span>
+				<p:commandLink actionListener="#{newTestBean.eliminarPregunta(newquestion)}" update="formNewTest:pgPreguntas" process="@this">
+					<h:outputText value="" class="fa fa-remove enlace-tree"/>
+				</p:commandLink>
+            </span>
+            </span>
+	          <h:outputText value="#{newquestion.content}" escape="false"
+	          /> 
+	        </ui:repeat>
+        </h:panelGroup>
+        <div class="linea"/>
+        <h4>Nueva pregunta:</h4>
+        <h:panelGroup id="pgNuevaPregunta">
+          <p:messages id="messagesPregunta" showDetail="true" closable="true"/>
+          <!-- Contenido -->
+          <p:outputLabel for="content3" value="Contenido:" style="display:block"/>
+          <p:textEditor id="content3" value="#{newTestBean.newquestion.content}" height="300" style="margin-top:15px; margin-bottom:10px" required="true" requiredMessage="La pregunta debe tener un contenido"/>
+          <p:message for="content3" style="display:block"/>
+          <!-- Puntos -->
+          <p:outputLabel for="puntos" value="Puntos:" style="display:block"/>
+          <p:inputNumber id="puntos" value="#{newTestBean.newquestion.points}" style="display:block" required="true" requiredMessage="Debe indicar la cantidad de puntos para la pregunta">
+            <f:validateDoubleRange minimum="0.1" maximum="100"/>
+          </p:inputNumber>
+          <p:message for="puntos" style="display:block"/>
+
+          <p:commandButton class="btnh" value="Agregar pregunta" actionListener="#{newTestBean.agregarPregunta()}" process="pgNuevaPregunta" update="pgPreguntas pgNuevaPregunta"/>
+        </h:panelGroup>
+        <br/><br/><br/><br/>
+        
+        <div class="linea"/>
+        <br/><br/><br/>
+      </h:form>
+    </ui:define>
+</ui:composition>

@@ -15,29 +15,28 @@
       <f:metadata>
           <f:viewParam name="idBlog" value="#{viewBlogBean.idBlog}"/>
       </f:metadata>
-      
+
       <script>
       	var selection = '';
       </script>
-      
+
         <h:form>
             <h:inputText value="#{viewBlogBean.textoSeleccionado}" class="input_textoSeleccionado" style="display:none"/>
             <h:commandButton value="" action="#{viewBlogBean.seleccionarTexto()}" class="btn_envioCadenaSeleccionada" style="display:none">
-                <f:ajax render="@form pgContenido" execute="@form"/>
+                <f:ajax render="pgContenido pgIdeas" execute="@form"/>
             </h:commandButton>
+            <p:hotkey bind="ctrl+shift+a" update="pgContenido pgIdeas" actionListener="#{viewBlogBean.seleccionarTexto()}"/>
         </h:form>
-      
-      
+
+
       <h1>#{viewBlogBean.blog.title}</h1>
-      <h:form>
-      <p:commandLink value="Construir diagrama" actionListener="#{viewBlogBean.solicitarDiagrama()}" process="@form" update="@form"/>
-      </h:form>
       <h4>Fecha de publicación: #{viewBlogBean.blog.FCreate}</h4>
       <h5>Autor: #{viewBlogBean.blog.userapp.name} #{viewBlogBean.blog.userapp.lastname}</h5>
       <div class="linea corte"/>
       <h3>Descripción:</h3>
       <p style="text-align:justify">#{viewBlogBean.blog.description}</p>
       <br/>
+
       <h3>Contenido:</h3>
       <h:panelGroup id="pgContenido">
       	<h:outputText class="contenido" value="#{viewBlogBean.content}" escape="false"/>
@@ -51,7 +50,59 @@
       }
       </script>
       </h:panelGroup>
+
+      <div class="linea"/>
+
+      <h3>Selección de ideas</h3>
       <p:button value="Seleccionar texto" class="btnSeleccionTexto btn btn-primary" onclick="seleccionarTexto();return false;"/>
+      <div class="corte"/>
+      <h:panelGroup id="pgIdeas">
+      	<h:panelGroup rendered="#{not empty viewBlogBean.concepts}">
+        <h5>Ideas seleccionadas:</h5>
+        <ul>
+          <ui:repeat value="#{viewBlogBean.concepts}" var="concept">
+            <li>
+            <span>
+            <span>#{concept}</span>
+            <span>
+				<p:commandLink actionListener="#{viewBlogBean.eliminarConcepto(concept)}" update="pgIdeas pgContenido" process="@this">
+					<h:outputText value="" class="fa fa-remove enlace-tree"/>
+				</p:commandLink>
+            </span>
+            </span>
+            
+            </li>
+          </ui:repeat>
+        </ul>
+        <h:form>
+          <p:commandButton value="Construir diagrama" actionListener="#{viewBlogBean.solicitarDiagrama()}" process="@form" update="@form" class="btnh"/>
+        </h:form>
+        </h:panelGroup>
+      </h:panelGroup>
+      <div class="corte"/>
+      <h:panelGroup id="tests">
+      	<h3>Exámenes:</h3>
+        <span>
+        <cl:enlace id="nuevoExamen" valor="Nuevo examen" transaccion="test/newtest"  atributo1="idBlog" valor1="#{viewBlogBean.blog.id}" rendered="#{blog.userapp.id eq usuarioBean.userarppSession.id}"/>
+        </span>
+        <div class="corte"/>
+        <p:dataTable id="dataTableTests" value="#{viewBlogBean.blog.tests}" var="test" emptyMessage="No hay examenes para este blog">
+          <f:facet name="header">
+            Exámenes asociados a este blog
+          </f:facet>
+          <p:column headerText="Nombre">
+            #{test.name}
+          </p:column>
+          <p:column headerText="Acciones" width="15%">
+            <h:panelGroup id="pgPresentar" style="display:inline-block">
+                <cl:enlaceIcono id="solicitudExamen" transaccion="test/test" icono="ui-icon-document" atributo1="idTest" valor1="#{test.id}" tooltip="Presentar examen"/>
+            </h:panelGroup>
+          </p:column>
+        </p:dataTable>
+        <div class="corte"/>
+
+      </h:panelGroup>
+
 
     </ui:define>
 </ui:composition>

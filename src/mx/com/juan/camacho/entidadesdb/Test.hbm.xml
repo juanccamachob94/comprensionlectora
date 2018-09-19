@@ -17,9 +17,6 @@
         <property name="FCreate" type="timestamp">
             <column name="f_create" length="29" />
         </property>
-        <property name="content" type="string">
-            <column name="content" not-null="true" />
-        </property>
         <set name="questions" table="question" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="test_id" not-null="true" />

@@ -22,6 +22,14 @@ public class ViewBlogBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
   private DiagramBean diagramBean;
   
   
+  public List<String> getConcepts() {
+	  return this.concepts;
+  }
+  
+  public void setConcepts(List<String> concepts) {
+	  this.concepts = concepts;
+  }
+  
   public DiagramBean getDiagramBean() {
 	  return this.diagramBean;
   }
@@ -39,8 +47,8 @@ public class ViewBlogBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
   }
 
   public void seleccionarTexto() {
+	  this.textoSeleccionado = this.textoSeleccionado.trim();
 	  if(this.textoSeleccionado != null && !this.textoSeleccionado.trim().equals("") && !this.textoSeleccionado.contains("style=\"background-color:yellow\"") || (this.textoSeleccionado.contains("style=\"background-color:yellow\"") && !this.textoSeleccionado.contains("</span>"))) {
-		  //this.content = this.content.replace("><","> <");
 		  Matcher mTexto = Pattern.compile("([^\\>\\<]+(?=((\\<[^\\>\\<]+\\>)|(\\<\\/[^\\>\\<]+\\>))))|(?<=\\>)(^.)*(?=\\<)").matcher(this.content);
 		  Matcher mEtiquetas = Pattern.compile("(\\<[^\\>\\<]+\\>)|(\\<\\/[^\\>\\<]+\\>)").matcher(this.content);
 		  List<String> matchesTexto = new ArrayList<String>();
@@ -56,10 +64,22 @@ public class ViewBlogBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
 		  if(tx <= tl) cadena = cadena + matchesEtiquetas.get(tl - 1);
 		  else cadena = cadena + matchesTexto.get(tx -1);
 		  this.content = cadena;
-		  //this.content = this.content.replace("> <","><");
-		  this.concepts.add(this.textoSeleccionado);
+		  boolean encontrado = false;
+		  for(String concept : concepts)
+			  if(concept.equals(this.textoSeleccionado)) {
+				  encontrado = true;
+				  break;
+			  }
+		  if(!encontrado) this.concepts.add(this.textoSeleccionado);
 	  }
 		  
+  }
+  
+  public void eliminarConcepto(String concepto) {
+	  try {
+		  this.content = this.content.replace("<span style=\"background-color:yellow\">" + concepto + "</span>", concepto);
+		  this.concepts.remove(concepto);
+	  } catch(Exception e) {}
   }
   
   public void solicitarDiagrama() {

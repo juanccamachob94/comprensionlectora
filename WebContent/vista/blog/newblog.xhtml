@@ -12,6 +12,12 @@
       xmlns:cl="comprensionlectora/facelets"
       template="../../resources/schemas/main_template.xhtml">
       <ui:define name="content">
+<script language="JavaScript">
+    window.onbeforeunload = confirmExit;
+    function confirmExit() {
+        return "You have attempted to leave this page. Are you sure?";
+    }
+</script>
       <h1>Nuevo blog</h1>
       <h:form id="formNewBlog">
 

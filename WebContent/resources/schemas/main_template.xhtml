@@ -38,7 +38,7 @@
                 <p:panel id="pPerfil" header="Información del usuario" toggleable="true" closable="false" toggleSpeed="500" style="margin-bottom:20px">
                 <center>
                 <h5>Hola, #{usuarioBean.userappSession.name} #{usuarioBean.userappSession.lastname}</h5>
-                <img src="#{generalBean.saltosDirec}../resources/imgs/users/#{empty usuarioBean.userappSession.picture? 'basic.png' : usuarioBean.userappSession.picture}" width="70%"/>
+                <img id="imagenPerfil" src="#{generalBean.saltosDirec}../resources/imgs/users/#{empty usuarioBean.userappSession.picture? 'basic.png' : usuarioBean.userappSession.picture}" width="70%"/>
                 </center>
                 <div class="corte"/>
                 Exámenes presentados: #{testBean.examenesPresentados}

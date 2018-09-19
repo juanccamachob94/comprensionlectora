@@ -18,7 +18,7 @@
             <column name="answer" />
         </property>
         <property name="earnedPoints" type="big_decimal">
-            <column name="earned_points" precision="5" not-null="true" />
+            <column name="earned_points" precision="5"/>
         </property>
         <property name="dateOfGrades" type="date">
             <column name="date_of_grades" length="13" />

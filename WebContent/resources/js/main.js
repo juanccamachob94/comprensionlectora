@@ -96,10 +96,10 @@ function ocultar(p) {
 
 
 $( document ).ready(function() {
-	$('#left img').css('max-height',$('#left img').width());
+	$('#imagenPerfil').height($('#imagenPerfil').width());
 });
 
 
 $(window).resize(function() {
-	$('#left img').height($('#left img').width());
+	$('#imagenPerfil').height($('#imagenPerfil').width());
 	});

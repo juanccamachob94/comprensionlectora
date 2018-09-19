@@ -16,26 +16,23 @@ public class Test  implements java.io.Serializable {
      private Blog blog;
      private String name;
      private Date FCreate;
-     private String content;
      private Set questions = new HashSet(0);
 
     public Test() {
     }
 
 	
-    public Test(int id, Blog blog, String name, Date FCreate, String content) {
+    public Test(int id, Blog blog, String name, Date FCreate) {
         this.id = id;
         this.blog = blog;
         this.name = name;
         this.FCreate = FCreate;
-        this.content = content;
     }
-    public Test(int id, Blog blog, String name, Date FCreate, String content, Set questions) {
+    public Test(int id, Blog blog, String name, Date FCreate, Set questions) {
        this.id = id;
        this.blog = blog;
        this.name = name;
        this.FCreate = FCreate;
-       this.content = content;
        this.questions = questions;
     }
    
@@ -66,13 +63,6 @@ public class Test  implements java.io.Serializable {
     
     public void setFCreate(Date FCreate) {
         this.FCreate = FCreate;
-    }
-    public String getContent() {
-        return this.content;
-    }
-    
-    public void setContent(String content) {
-        this.content = content;
     }
     public Set getQuestions() {
         return this.questions;
