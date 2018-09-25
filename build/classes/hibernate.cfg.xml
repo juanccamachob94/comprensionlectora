@@ -11,11 +11,11 @@
     <mapping resource="mx/com/juan/camacho/entidadesdb/Menu.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/TestContent.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Userapp.hbm.xml"/>
-    <mapping resource="mx/com/juan/camacho/entidadesdb/Post.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Blog.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Test.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Comment.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/UserappQuestion.hbm.xml"/>
     <mapping resource="mx/com/juan/camacho/entidadesdb/Question.hbm.xml"/>
+    <mapping resource="mx/com/juan/camacho/entidadesdb/TiempoOtro.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

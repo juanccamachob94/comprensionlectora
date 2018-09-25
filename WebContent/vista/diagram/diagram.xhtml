@@ -13,9 +13,7 @@
       template="../../resources/schemas/main_template.xhtml">
       <ui:define name="content">
 <p:diagram value="#{diagramBean.model}" style="height:70%;width:100%" styleClass="diagrama ui-widget-content otracosa" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-<button onclick="javascript:demoFromHTML();">PDF</button>
- 
+
  
 <style type="text/css">
     .ui-diagram-element {
@@ -26,20 +24,6 @@
         text-align: center;
     }
 </style>
-<img src="" id="img" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
-<script src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.svg.js"></script>
-<script src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js"></script>
-  <script>	
-  function juan(){ 
-	    html2canvas($('.otracosa').get(0)).then(function (canvas) {
-	        var base64encodedstring = canvas.toDataURL("image/jpeg", 1);
-	        $('#img').attr('src', base64encodedstring);
-	      });	  
-	  
-  }
-
-  </script>
 
     </ui:define>
 </ui:composition>

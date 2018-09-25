@@ -64,7 +64,7 @@ public class NewTestBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
     try {
       if(this.points + this.newquestion.getPoints().floatValue() <= 100) {
     	  this.questions.add(this.newquestion);
-    	  this.points += this.newquestion.getPoints().floatValue(); 
+    	  this.points += this.newquestion.getPoints().floatValue();
       }else this.enviarMensaje(null,"Has superado el máximo de puntos en el examen","error");
     } catch(Exception e) {
       this.enviarMensaje(null,"No se pudo agregar la pregunta al examen. " + e.getMessage(),"fatal");
@@ -110,9 +110,10 @@ public class NewTestBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
       this.enviarMensaje(null,"No se pudo crear el examen. " + e.getMessage(),"fatal");
     }
   }
-  
+
   public void eliminarPregunta(Question newquestion) {
 	  try {
+      this.points -= newquestion.getPoints().intValue();
 		  this.questions.remove(newquestion);
 	  } catch(Exception e) {
 		  this.mostrarModal("No se pudo eliminar la pregunta","fatal");

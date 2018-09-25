@@ -41,7 +41,7 @@ public class GeneralBean implements java.io.Serializable {
 	public UsuarioBean getUsuarioBean() {
 		return this.usuarioBean;
 	}
-	
+
 	public void setUsuarioBean(UsuarioBean usuarioBean) {
 		this.usuarioBean = usuarioBean;
 	}
@@ -69,7 +69,7 @@ public class GeneralBean implements java.io.Serializable {
 	public void setDataSource(DataSource dataSource) {
             this.dataSource = dataSource;
 	}
-	
+
 	public int getCantidad() {
 		try {
 			return this.dataSource.contarQ("SELECT COUNT(*) FROM BLOG");
@@ -78,7 +78,7 @@ public class GeneralBean implements java.io.Serializable {
 			return 0;
 		}
 	}
-	
+
 
     /**
      * Permite mostrar una respuesta a un
@@ -223,7 +223,7 @@ public class GeneralBean implements java.io.Serializable {
     protected void ejecutarJS(String funcion) {
         RequestContext.getCurrentInstance().execute(funcion + "()");
     }
-    
+
     protected void ejecutarJS2(String funcion) {
     	PrimeFaces.current().executeScript(funcion);
     }
@@ -373,7 +373,12 @@ public class GeneralBean implements java.io.Serializable {
 	}
 
 	public String formatearFecha(Date fecha) {
-		return Utilitaria.formatearDate(fecha,"dd/MM/yyyy HH:mm");
+		try {
+			return Utilitaria.formatearDate(fecha,"dd/MM/yyyy HH:mm");	
+		} catch(Exception e) {
+			return null;
+		}
+		
 	}
 
 	public String precio(BigDecimal numero) {
@@ -398,5 +403,13 @@ public class GeneralBean implements java.io.Serializable {
 		String dirIP = request.getHeader("X-FORWARDED-FOR");
 		if (dirIP == null) dirIP = request.getRemoteAddr();
 		return dirIP;
+	}
+	
+	public String tiempoEntre(Date a, Date b) {
+		try {
+			return Utilitaria.tiempoDiferencia(Utilitaria.diferencia(a,b));	
+		} catch(Exception e) {
+			return null;
+		}
 	}
 }

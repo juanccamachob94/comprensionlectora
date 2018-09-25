@@ -16,6 +16,8 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.primefaces.context.RequestContext;
+
 import mx.com.juan.camacho.hibernate.DataSource;
 import mx.com.juan.camacho.utilitaria.Utilitaria;
 
@@ -114,7 +116,7 @@ public class UsuarioBean implements java.io.Serializable {
       }
     } catch(Exception e) {
       if(!this.isSessionStarted()) this.userapp.setPassword(null);
-      this.sendMessage(null,"No se puede iniciar sesión. " + e.getMessage(),"fatal");
+      this.mostrarModal("No se puede iniciar sesión. " + e.getMessage(),"fatal");
     }
   }
 
@@ -149,7 +151,24 @@ public class UsuarioBean implements java.io.Serializable {
 	return salto;
   }
 
-
+  public void mostrarModal(String mensaje, String tipo) {
+    Severity s = null;
+      switch (tipo) {
+          case "info":
+              s = FacesMessage.SEVERITY_INFO;
+              break;
+          case "warn":
+              s = FacesMessage.SEVERITY_WARN;
+              break;
+          case "error":
+              s = FacesMessage.SEVERITY_ERROR;
+              break;
+          case "fatal":
+              s = FacesMessage.SEVERITY_FATAL;
+              break;
+      }
+    RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(s, "Mensaje", mensaje));
+  }
 
   /**
      * Permite mostrar una respuesta en la parte superior derecha del navegador

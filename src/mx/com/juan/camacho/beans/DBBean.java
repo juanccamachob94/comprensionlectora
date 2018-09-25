@@ -21,6 +21,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
     protected String select = " ";
     protected String from = " ";
     protected String where = " ";
+    protected String groupBy = " ";
     protected String order = " ";
     protected String id = " ";
     protected int idMax = -1;
@@ -38,6 +39,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
     protected String select_bk = " ";
     protected String from_bk = " ";
     protected String where_bk = " ";
+    protected String groupBy_bk = " ";
     protected String order_bk = " ";
 
     protected void reestablecerQuery() {
@@ -48,6 +50,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
             this.select = this.select_bk;
             this.from = this.from_bk;
             this.where = this.where_bk;
+            this.groupBy = this.groupBy_bk;
             this.order = this.order_bk;
             this.atributosQuery = new ArrayList<Atributo>();
     }
@@ -69,7 +72,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
                     this.paginaFinal = (int)((double)(((double) this.numRegistros) / ((double)this.numRegistrosPorPagina)) + 0.9999);
                     if(this.paginaFinal == 0) this.paginaFinal = 1;
             } catch(Exception e) {
-                    this.mostrarModal("No se pudo validar la paginación de la consulta " + "SELECT COUNT(*) " + this.from + this.where + ". " + e.getMessage(), "fatal");
+                    this.mostrarModal("No se pudo validar la paginación de la consulta " + "SELECT COUNT(*) " + this.from + this.where + this.groupBy + ". " + e.getMessage(), "fatal");
             }
             return paginaFinal;
     }
@@ -81,17 +84,17 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
             try {
                     if(this.idMax == -1 && this.idMin == -1) {//Condiciones iniciales de la consulta
                             if(!this.order.toLowerCase().contains("desc")) {
-                                    lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + this.order,numRegistrosPorPagina,this.atributosQuery);
+                                    lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + this.groupBy + this.order,numRegistrosPorPagina,this.atributosQuery);
                                     this.idMax = lista.get(lista.size() - 1);
-                                    this.idMin = (Integer)this.dataSource.consultarObjeto("SELECT MIN(" + this.id + ") " + this.from + this.where,this.atributosQuery);
+                                    this.idMin = (Integer)this.dataSource.consultarObjeto("SELECT MIN(" + this.id + ") " + this.from + this.where + this.groupBy,this.atributosQuery);
                             } else {
-                                    this.idMax = (Integer)this.dataSource.consultarObjeto("SELECT MAX(" + this.id + ") " + this.from + this.where,this.atributosQuery);
-                                    lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + this.order,numRegistrosPorPagina,this.atributosQuery);
+                                    this.idMax = (Integer)this.dataSource.consultarObjeto("SELECT MAX(" + this.id + ") " + this.from + this.where + this.groupBy,this.atributosQuery);
+                                    lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + this.groupBy + this.order,numRegistrosPorPagina,this.atributosQuery);
                                     this.idMin = lista.get(lista.size() - 1);
                             }
                     }
                     if(!this.datosCargados) hacerBackupQuery();
-                    return this.dataSource.consultarLista((this.select + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + comparacion(this.where + "where",this.id,this.idMin,false) + this.order).replaceAll("  "," ").replaceAll("  "," "),this.numRegistrosPorPagina,this.atributosQuery);
+                    return this.dataSource.consultarLista((this.select + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + comparacion(this.where + "where",this.id,this.idMin,false) + this.groupBy + this.order).replaceAll("  "," ").replaceAll("  "," "),this.numRegistrosPorPagina,this.atributosQuery);
             } catch(java.lang.ArrayIndexOutOfBoundsException aiex) {
                     return null;
             } catch(NullPointerException ne) {
@@ -105,7 +108,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
 
     @SuppressWarnings("unchecked")
     protected List<T> getTodosDatos() throws Exception {
-            return this.dataSource.consultarLista((this.select + this.from + this.where + this.order).replaceAll("  "," ").replaceAll("  "," "),this.atributosQuery);
+            return this.dataSource.consultarLista((this.select + this.from + this.where + this.groupBy + this.order).replaceAll("  "," ").replaceAll("  "," "),this.atributosQuery);
     }
 
     protected void agregarCondicion(String atributo, Object valor, String comparacion) {
@@ -158,6 +161,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
             while(this.select.contains("  ")) this.select = this.select.replace("  "," ");
             while(this.from.contains("  ")) this.from = this.from.replace("  "," ");
             while(this.where.contains("  ")) this.where = this.where.replace("  "," ");
+            while(this.groupBy.contains("  ")) this.groupBy = this.groupBy.replace("  "," ");
             while(this.order.contains("  ")) this.order = this.order.replace("  "," ");
     }
 
@@ -167,11 +171,11 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
             try {
                     if(!this.order.toLowerCase().contains("desc")) {
                             this.idMin = this.idMax + 1;
-                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMin,false) + this.order,numRegistrosPorPagina,this.atributosQuery);
+                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMin,false) + this.groupBy + this.order,numRegistrosPorPagina,this.atributosQuery);
                             this.idMax = lista.get(lista.size() - 1);
                     } else {
                             this.idMax = this.idMin - 1;
-                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + this.order,numRegistrosPorPagina,this.atributosQuery);
+                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + this.groupBy + this.order,numRegistrosPorPagina,this.atributosQuery);
                             this.idMin = lista.get(lista.size() - 1);
                     }
                     this.paginaActual += 1;
@@ -186,11 +190,11 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
             try {
                     if(!this.order.toLowerCase().contains("desc")) {
                             this.idMax = this.idMin - 1;
-                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + ordenInverso(this.id,this.order),numRegistrosPorPagina,this.atributosQuery);
+                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + this.groupBy + ordenInverso(this.id,this.order),numRegistrosPorPagina,this.atributosQuery);
                             this.idMin = lista.get(lista.size() - 1);
                     } else {
                             this.idMin = this.idMax + 1;
-                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMin,false) + ordenInverso(this.id,this.order),numRegistrosPorPagina,this.atributosQuery);
+                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMin,false) + this.groupBy + ordenInverso(this.id,this.order),numRegistrosPorPagina,this.atributosQuery);
                             this.idMax = lista.get(lista.size() - 1);
                     }
                     this.paginaActual -= 1;
@@ -211,12 +215,12 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
             List<Integer> lista;
             try {
                     if(!this.order.toLowerCase().contains("desc")) {
-                            this.idMax = (Integer)this.dataSource.consultarObjeto("SELECT MAX(" + this.id + ") " + this.from + this.where);
-                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + ordenInverso(this.id,this.order),numRegistrosUltimaPagina,this.atributosQuery);
+                            this.idMax = (Integer)this.dataSource.consultarObjeto("SELECT MAX(" + this.id + ") " + this.from + this.where + this.groupBy);
+                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMax,true) + this.groupBy + ordenInverso(this.id,this.order),numRegistrosUltimaPagina,this.atributosQuery);
                             this.idMin = lista.get(lista.size() - 1);
                     } else {
-                            this.idMin = (Integer)this.dataSource.consultarObjeto("SELECT MIN(" + this.id + ") " + this.from + this.where);
-                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + comparacion(this.where,this.id,this.idMin,false) + ordenInverso(this.id,this.order),numRegistrosUltimaPagina,this.atributosQuery);
+                            this.idMin = (Integer)this.dataSource.consultarObjeto("SELECT MIN(" + this.id + ") " + this.from + this.where + this.groupBy);
+                            lista = (List<Integer>)this.dataSource.consultarLista("SELECT " + this.id + this.from + this.where + this.groupBy + comparacion(this.where,this.id,this.idMin,false) + ordenInverso(this.id,this.order),numRegistrosUltimaPagina,this.atributosQuery);
                             this.idMax = lista.get(lista.size() - 1);
                     }
                     this.paginaActual = this.paginaFinal;
@@ -229,6 +233,7 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
             this.select_bk = this.select;
             this.from_bk = this.from;
             this.where_bk = this.where;
+            this.groupBy_bk = this.groupBy;
             this.order_bk = this.order;
             this.datosCargados = true;
     }
@@ -257,12 +262,14 @@ public class DBBean<T> extends GeneralVistaBean implements java.io.Serializable 
     }
 
     protected void imprimirQuery() {
-            System.out.println(this.select + this.from + this.where + this.order);
+            System.out.println(this.select + this.from + this.where + this.groupBy + this.order);
     }
 
     public int getNumRegistros() {
             try {
-                    this.numRegistros = this.dataSource.contar("SELECT COUNT(*) " + this.from + this.where, this.atributosQuery);
+            	System.out.println("SDADASDASDSADASDASDSDSASSSSSSSSSSSSSSSSSSSSSWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWQQQQQQQQQQQQQQQs");
+            	System.out.println("SELECT COUNT(*) " + this.from + this.where + this.groupBy);
+            	this.numRegistros = this.dataSource.contar("SELECT COUNT(*) " + this.from + this.where + this.groupBy, this.atributosQuery);
             } catch(Exception e) {
                     this.mostrarModal("No se pudo calcular el número de registros de la consulta","fatal");
             }

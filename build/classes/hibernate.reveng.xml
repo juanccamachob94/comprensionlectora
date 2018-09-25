@@ -3,7 +3,6 @@
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="comprensionlectora" match-schema="public"/>
   <table-filter match-name="question"/>
-  <table-filter match-name="post"/>
   <table-filter match-name="blog"/>
   <table-filter match-name="test_content"/>
   <table-filter match-name="userapp"/>
@@ -11,4 +10,5 @@
   <table-filter match-name="userapp_question"/>
   <table-filter match-name="test"/>
   <table-filter match-name="comment"/>
+  <table-filter match-name="tiempo_otro"/>
 </hibernate-reverse-engineering>

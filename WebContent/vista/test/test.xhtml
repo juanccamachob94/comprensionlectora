@@ -36,7 +36,7 @@
           <ui:repeat id="repeatUserappQuestion" value="#{testBean.userappQuestions}" var="userappQuestion" varStatus="estado">
             <div>
               <h:outputText value="#{(estado.index + 1)}. #{userappQuestion.question.content}" escape="false" style="display:block"/>
-              <p:inputTextarea id="respuesta" value="#{userappQuestion.answer}" style="width:100%" rows="7" required="true" requiredMessage="La pregunta #{(estado.index)} debe ser contestada"/>
+              <p:editor id="respuesta" value="#{userappQuestion.answer}" style="width:100%" rows="7" required="true" requiredMessage="La pregunta #{(estado.index)} debe ser contestada"/>
               <p:message for="respuesta"/>
             </div>
           </ui:repeat>

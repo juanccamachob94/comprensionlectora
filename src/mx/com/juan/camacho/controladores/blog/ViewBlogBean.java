@@ -86,7 +86,8 @@ public class ViewBlogBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
 	  this.diagramBean.setConcepts(this.concepts);
 	  try {
 		  this.mostrarPagina("diagram/diagram");
-	  } catch(Exception e) {}
+	  } catch(Exception e) {
+	  }
   }
   
   public String getTextoSeleccionado() {

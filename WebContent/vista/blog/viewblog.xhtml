@@ -56,7 +56,8 @@
       <h3>Selección de ideas</h3>
       <p:button value="Seleccionar texto" class="btnSeleccionTexto btn btn-primary" onclick="seleccionarTexto();return false;"/>
       <div class="corte"/>
-      <h:panelGroup id="pgIdeas">
+      <h:form id="pgIdeas">
+      <h:panelGroup>
       	<h:panelGroup rendered="#{not empty viewBlogBean.concepts}">
         <h5>Ideas seleccionadas:</h5>
         <ul>
@@ -74,11 +75,13 @@
             </li>
           </ui:repeat>
         </ul>
-        <h:form>
-          <p:commandButton value="Construir diagrama" actionListener="#{viewBlogBean.solicitarDiagrama()}" process="@form" update="@form" class="btnh"/>
-        </h:form>
+        
+          
+        
         </h:panelGroup>
       </h:panelGroup>
+      	<p:commandButton value="Construir diagrama" rendered="#{not empty viewBlogBean.concepts}" actionListener="#{viewBlogBean.solicitarDiagrama()}" process="@this" update="@form" class="btnh"/>
+      </h:form>
       <div class="corte"/>
       <h:panelGroup id="tests">
       	<h3>Exámenes:</h3>
