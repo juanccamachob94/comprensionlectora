@@ -4,6 +4,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.context.RequestContext;
+
 import mx.com.juan.camacho.controladores.diagram.DiagramBean;
 import mx.com.juan.camacho.entidadesdb.Blog;
 import java.util.List;
@@ -84,10 +86,6 @@ public class ViewBlogBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
   
   public void solicitarDiagrama() {
 	  this.diagramBean.setConcepts(this.concepts);
-	  try {
-		  this.mostrarPagina("diagram/diagram");
-	  } catch(Exception e) {
-	  }
   }
   
   public String getTextoSeleccionado() {

@@ -1,5 +1,5 @@
 package mx.com.juan.camacho.entidadesdb;
-// Generated 12/09/2018 04:55:26 PM by Hibernate Tools 4.3.1
+// Generated 2/10/2018 11:28:17 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -21,7 +21,7 @@ public class Userapp  implements java.io.Serializable {
      private String password;
      private Set userappQuestions = new HashSet(0);
      private Set blogs = new HashSet(0);
-     private Set comments = new HashSet(0);
+     private Set tiempoOtros = new HashSet(0);
 
     public Userapp() {
     }
@@ -36,7 +36,7 @@ public class Userapp  implements java.io.Serializable {
         this.sex = sex;
         this.password = password;
     }
-    public Userapp(int id, String userappname, String name, String lastname, String email, String picture, char sex, String password, Set userappQuestions, Set blogs, Set comments) {
+    public Userapp(int id, String userappname, String name, String lastname, String email, String picture, char sex, String password, Set userappQuestions, Set blogs, Set tiempoOtros) {
        this.id = id;
        this.userappname = userappname;
        this.name = name;
@@ -47,7 +47,7 @@ public class Userapp  implements java.io.Serializable {
        this.password = password;
        this.userappQuestions = userappQuestions;
        this.blogs = blogs;
-       this.comments = comments;
+       this.tiempoOtros = tiempoOtros;
     }
    
     public int getId() {
@@ -120,12 +120,12 @@ public class Userapp  implements java.io.Serializable {
     public void setBlogs(Set blogs) {
         this.blogs = blogs;
     }
-    public Set getComments() {
-        return this.comments;
+    public Set getTiempoOtros() {
+        return this.tiempoOtros;
     }
     
-    public void setComments(Set comments) {
-        this.comments = comments;
+    public void setTiempoOtros(Set tiempoOtros) {
+        this.tiempoOtros = tiempoOtros;
     }
 
 

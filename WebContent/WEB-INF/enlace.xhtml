@@ -12,7 +12,7 @@
     </head>
     <body>
         <ui:composition>
-        <p:link id="#{id}" outcome="/vista/#{transaccion}" value="#{valor}">
+        <p:link id="#{id}" outcome="/vista/#{transaccion}" value="#{valor}" target="#{empty target ? '_parent' : target}">
             <f:param name="#{atributo1}" value="#{valor1}" rendered="#{(not empty atributo1)and(not empty valor1)}"/>
             <f:param name="#{atributo2}" value="#{valor2}" rendered="#{(not empty atributo2)and(not empty valor2)}"/>
         </p:link>

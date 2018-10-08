@@ -94,7 +94,6 @@ function ocultar(p) {
 	PF(p).hide();
 }
 
-
 $( document ).ready(function() {
 	$('#imagenPerfil').height($('#imagenPerfil').width());
 });

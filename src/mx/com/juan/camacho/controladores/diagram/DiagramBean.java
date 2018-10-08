@@ -1,7 +1,7 @@
 package mx.com.juan.camacho.controladores.diagram;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import org.primefaces.model.diagram.DefaultDiagramModel;
 import org.primefaces.model.diagram.DiagramModel;
 import org.primefaces.model.diagram.Element;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class DiagramBean {
 	
 	private static final long serialVersionUID = 1L;

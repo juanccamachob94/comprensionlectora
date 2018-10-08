@@ -1,5 +1,5 @@
 package mx.com.juan.camacho.entidadesdb;
-// Generated 12/09/2018 04:55:26 PM by Hibernate Tools 4.3.1
+// Generated 2/10/2018 11:28:17 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;

@@ -16,7 +16,7 @@
           <f:viewParam name="idTest" value="#{testBean.idTest}"/>
       </f:metadata>
       <h1>Examen: #{testBean.test.name}</h1>
-      <span>Este es un examen para el blog </span><cl:enlace id="enlaceBlog" transaccion="blog/viewblog" valor="#{testBean.test.blog.title}" valor1="#{testBean.test.blog.id}" atributo1="idBlog"/>
+      <span>Este es un examen para el blog </span><cl:enlace id="enlaceBlog" target="_blank" transaccion="blog/viewblog" valor="#{testBean.test.blog.title}" valor1="#{testBean.test.blog.id}" atributo1="idBlog"/>
       <h5>Fecha de publicación:#{generalBean.formatearFecha(testBean.test.FCreate)} </h5>
       <div class="linea"/>
       <h:panelGroup id="pgQuestion">
@@ -35,10 +35,19 @@
           <p:messages id="messagespreguntasexamen" showDetail="true" closable="true"/>
           <ui:repeat id="repeatUserappQuestion" value="#{testBean.userappQuestions}" var="userappQuestion" varStatus="estado">
             <div>
-              <h:outputText value="#{(estado.index + 1)}. #{userappQuestion.question.content}" escape="false" style="display:block"/>
-              <p:editor id="respuesta" value="#{userappQuestion.answer}" style="width:100%" rows="7" required="true" requiredMessage="La pregunta #{(estado.index)} debe ser contestada"/>
-              <p:message for="respuesta"/>
+              <h:outputText value="#{generalBean.concatenar((estado.index + 1),userappQuestion.question.content)}" escape="false" style="display:block"/>
+              <h:panelGroup rendered="#{userappQuestion.question.type eq 'OPEN'}">
+              	<p:editor id="respuesta" value="#{userappQuestion.answer}" style="width:100%" rows="7" required="true" requiredMessage="La pregunta #{(estado.index)} debe ser contestada"/>
+              	<p:message for="respuesta"/>
+              </h:panelGroup>
+              <h:panelGroup rendered="#{userappQuestion.question.type eq 'MULTIPLE'}">
+              	<p:selectOneRadio id="opcsMultiples" value="#{testBean.idsAtributos[estado.index]}">
+              		<f:selectItems value="#{testBean.capsulaQuestions[estado.index]}" var="atributoOpcion" itemValue="#{atributoOpcion.nombre}" itemLabel="#{atributoOpcion.valor.description}"/>
+              		<p:ajax event="click" listener="#{testBean.setOptionQuestion(estado.index)}" process="@this" update="@this"/>
+              	</p:selectOneRadio>
+              </h:panelGroup>
             </div>
+            <br/>
           </ui:repeat>
           <p:commandButton value="Finalizar" actionListener="#{testBean.finalizarExamen()}" class="btnh" process="@form" update="pgQuestion"/>
         </h:form>

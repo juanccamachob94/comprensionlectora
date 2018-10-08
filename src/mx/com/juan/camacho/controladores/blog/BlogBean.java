@@ -28,6 +28,7 @@ public class BlogBean extends mx.com.juan.camacho.beans.DBBean<Blog> {
   public void asignarParametrosConsulta() {
     this.agregarOpcion("blog.title",this.busqueda,"LIKE");
     this.agregarOpcion("blog.description",this.busqueda,"LIKE");
+    this.agregarOpcion("blog.content",this.busqueda,"LIKE");
   }
 
   public BlogBean() {

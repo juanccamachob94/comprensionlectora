@@ -1,5 +1,5 @@
 package mx.com.juan.camacho.entidadesdb;
-// Generated 12/09/2018 04:55:26 PM by Hibernate Tools 4.3.1
+// Generated 2/10/2018 11:28:17 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -17,23 +17,24 @@ public class Test  implements java.io.Serializable {
      private String name;
      private Date FCreate;
      private Set questions = new HashSet(0);
+     private Set levelTests = new HashSet(0);
 
     public Test() {
     }
 
 	
-    public Test(int id, Blog blog, String name, Date FCreate) {
+    public Test(int id, Blog blog, String name) {
         this.id = id;
         this.blog = blog;
         this.name = name;
-        this.FCreate = FCreate;
     }
-    public Test(int id, Blog blog, String name, Date FCreate, Set questions) {
+    public Test(int id, Blog blog, String name, Date FCreate, Set questions, Set levelTests) {
        this.id = id;
        this.blog = blog;
        this.name = name;
        this.FCreate = FCreate;
        this.questions = questions;
+       this.levelTests = levelTests;
     }
    
     public int getId() {
@@ -70,6 +71,13 @@ public class Test  implements java.io.Serializable {
     
     public void setQuestions(Set questions) {
         this.questions = questions;
+    }
+    public Set getLevelTests() {
+        return this.levelTests;
+    }
+    
+    public void setLevelTests(Set levelTests) {
+        this.levelTests = levelTests;
     }
 
 

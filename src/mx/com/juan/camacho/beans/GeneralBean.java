@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Set;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -20,6 +22,8 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.TreeNode;
 import javax.faces.component.UIComponent;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import mx.com.juan.camacho.entidades.MensajeRespuestaBean;
 import mx.com.juan.camacho.hibernate.DataSource;
@@ -411,5 +415,20 @@ public class GeneralBean implements java.io.Serializable {
 		} catch(Exception e) {
 			return null;
 		}
+	}
+
+	public List barajar(List lista) {
+		Collections.shuffle(lista);
+		return lista;
+	}
+	
+	public List barajar(Set set) {
+		List lista = new ArrayList(set);
+		Collections.shuffle(lista);
+		return lista;
+	}
+	
+	public String concatenar(int id, String content) {
+		return content.replaceFirst("\\<div style=\"(.*)\"\\>\\<font face","<div style=\"$1\"><span>" + Integer.toString(id) + ". </span>\\<font face");
 	}
 }

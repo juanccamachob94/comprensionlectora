@@ -6,9 +6,12 @@ import mx.com.juan.camacho.entidadesdb.Test;
 import mx.com.juan.camacho.entidadesdb.Blog;
 import mx.com.juan.camacho.entidadesdb.Question;
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
+import mx.com.juan.camacho.entidadesdb.Option;
 @ManagedBean
 @ViewScoped
 public class NewTestBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
@@ -16,7 +19,16 @@ public class NewTestBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
   private Test newtest;
   private Question newquestion;
   private List<Question> questions;
+  private List<Option> optionsQuestion;
   private float points;
+  
+  public List<Option> getOptionsQuestion() {
+	  return this.optionsQuestion;
+  }
+  
+  public void setOptionsQuestion(List<Option> optionsQuestion) {
+	  this.optionsQuestion = optionsQuestion;
+  }
 
   public float getPoints() {
     return this.points;
@@ -49,6 +61,14 @@ public class NewTestBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
   public List<Question> getQuestions() {
     return this.questions;
   }
+  
+  public void agregarOpcion() {
+	  this.optionsQuestion.add(new Option());
+  }
+  
+  public void eliminarOpcion(Option option) {
+	  this.optionsQuestion.remove(option);
+  }
 
   public void setQuestions(List<Question> questions) {
     this.questions = questions;
@@ -57,14 +77,31 @@ public class NewTestBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
   private void instanciarNewQuestion() {
      this.newquestion = new Question();
      this.newquestion.setFCreate(new java.util.Date());
-     this.newquestion.setType("OPEN");
+     this.newquestion.setType("MULTIPLE");
+     this.optionsQuestion = new ArrayList<Option>();
+     for(int i = 0; i < 4; i++)
+    	 this.optionsQuestion.add(new Option());
   }
 
   public void agregarPregunta() {
     try {
       if(this.points + this.newquestion.getPoints().floatValue() <= 100) {
-    	  this.questions.add(this.newquestion);
-    	  this.points += this.newquestion.getPoints().floatValue();
+    	  if(this.newquestion.getType().equals("MULTIPLE")) {
+    		  int numOptions = this.optionsQuestion.size();
+    		  int numAnswers = 0;
+    		  for(int i = 0; i < numOptions; i++)
+    			  if(this.optionsQuestion.get(i).isAnswer())
+    				  numAnswers += 1;
+    		  if(numAnswers == 1) {
+        		  this.newquestion.setOptions(new HashSet<Option>(this.optionsQuestion));
+        		  System.out.println(this.newquestion.getOptions().size());
+            	  this.questions.add(this.newquestion);
+            	  this.points += this.newquestion.getPoints().floatValue();
+    		  } else this.enviarMensaje(null,"Sólo debe haber una respuesta a la pregunta. Has asignado " + numAnswers + " respuestas", "fatal");
+    	  } else {
+        	  this.questions.add(this.newquestion);
+        	  this.points += this.newquestion.getPoints().floatValue();
+    	  }
       }else this.enviarMensaje(null,"Has superado el máximo de puntos en el examen","error");
     } catch(Exception e) {
       this.enviarMensaje(null,"No se pudo agregar la pregunta al examen. " + e.getMessage(),"fatal");
@@ -96,10 +133,19 @@ public class NewTestBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
           this.dataSource.recargar(this.newtest);
           int t = this.questions.size();
           Question question;
+          Set<Option> options;
           for(int i = 0; i < t; i++) {
             question = this.questions.get(i);
             question.setTest(this.newtest);
             this.dataSource.insertar(question);
+            options = (Set<Option>)question.getOptions();
+            this.dataSource.recargar(question);
+            System.out.println(options.size());
+            if(question.getType().equals("MULTIPLE"))
+            	for(Option option : options) {
+            		option.setQuestion(question);
+            		this.dataSource.insertar(option);
+            	}
           }
           this.dataSource.finalizarTransaccion();
           this.mostrarPagina("blog/viewblog","idBlog=" + Integer.toString(this.newtest.getBlog().getId()));

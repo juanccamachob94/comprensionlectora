@@ -15,7 +15,7 @@
       <f:metadata>
           <f:viewParam name="idBlog" value="#{editBlogBean.idBlog}"/>
       </f:metadata>
-      <h1>Edición del blog #{editBlogBean.editblog.id}</h1>
+      <h1>Edición del blog #{editBlogBean.editblog.id} <h:panelGroup rendered="#{editBlogBean.editblog.userapp.id eq usuarioBean.userappSession.id}"><cl:enlace id="ver" transaccion="blog/viewblog" valor="[Ver]" atributo1="idBlog" valor1="#{editBlogBean.editblog.id}"/></h:panelGroup></h1>
       <h:form id="formEditBlog">
 
 

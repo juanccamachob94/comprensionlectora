@@ -1,5 +1,5 @@
 package mx.com.juan.camacho.entidadesdb;
-// Generated 12/09/2018 04:55:26 PM by Hibernate Tools 4.3.1
+// Generated 2/10/2018 11:28:17 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -12,6 +12,7 @@ public class UserappQuestion  implements java.io.Serializable {
 
 
      private int id;
+     private Option option;
      private Question question;
      private Userapp userapp;
      private String answer;
@@ -22,14 +23,14 @@ public class UserappQuestion  implements java.io.Serializable {
     }
 
 	
-    public UserappQuestion(int id, Question question, Userapp userapp, BigDecimal earnedPoints) {
+    public UserappQuestion(int id, Question question, Userapp userapp) {
         this.id = id;
         this.question = question;
         this.userapp = userapp;
-        this.earnedPoints = earnedPoints;
     }
-    public UserappQuestion(int id, Question question, Userapp userapp, String answer, BigDecimal earnedPoints, Date dateOfGrades) {
+    public UserappQuestion(int id, Option option, Question question, Userapp userapp, String answer, BigDecimal earnedPoints, Date dateOfGrades) {
        this.id = id;
+       this.option = option;
        this.question = question;
        this.userapp = userapp;
        this.answer = answer;
@@ -43,6 +44,13 @@ public class UserappQuestion  implements java.io.Serializable {
     
     public void setId(int id) {
         this.id = id;
+    }
+    public Option getOption() {
+        return this.option;
+    }
+    
+    public void setOption(Option option) {
+        this.option = option;
     }
     public Question getQuestion() {
         return this.question;

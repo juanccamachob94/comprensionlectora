@@ -13,8 +13,10 @@
       template="../../resources/schemas/main_template.xhtml">
       <ui:define name="content">
       	<div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all panel-titulo">
-      	<span class="ui-panel-title titulo">Blogs publicados (#{blogBean.numRegistros})</span>
+      	<span class="ui-panel-title titulo">Total de blogs publicados: (#{blogBean.numRegistros})</span>
       	</div>
+        <br/>
+        <div class="linea"/>
         <div class="busquedablogs">
           <h:form id="formBusqueda">
             <h4 style="width:12%;display:inline-block">Búsqueda:</h4>
@@ -26,6 +28,7 @@
             </div>
           </h:form>
         </div>
+        <div class="linea"/>
         <h:form id="formBlogs">
           <br/>
           <p:dataTable id="dataTableBlogs" value="#{blogBean.datos}" var="blog" emptyMessage="Aún no se registran blogs">

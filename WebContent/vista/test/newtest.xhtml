@@ -30,7 +30,6 @@
           <p:message for="name" style="display:block"/>
           <p:commandButton value="Publicar examen" style="margin-left:auto;display:flex;" actionListener="#{newTestBean.publicarExamen()}" update="pgNewTest" process="pgNewTest"/>
         </h:panelGroup>
-		<br/>
         <div class="linea"/>
         <h2>Preguntas:</h2>
         <h4>Recuerda que cada examen debe tener un total de 100 puntos distribuidos en un número ilimitado de preguntas.</h4>
@@ -38,7 +37,7 @@
 	        <ui:repeat id="preguntas" value="#{newTestBean.questions}" var="newquestion" varStatus="status">
 	          
 	          
-            <span>
+            <span style="display:block">
             <span><span style="font-size:2.5em;font-weight:bold">Pregunta #{(status.index + 1)}.</span><span> #{newquestion.points} puntos</span></span>
             
             <span>
@@ -47,26 +46,71 @@
 				</p:commandLink>
             </span>
             </span>
-	          <h:outputText value="#{newquestion.content}" escape="false"
-	          /> 
+	          <h:outputText value="#{newquestion.content}" escape="false" style="display:block"/>
+	          
+	          <ui:repeat value="#{newquestion.options.toArray()}" var="option" varStatus="estado">
+	          	<h:outputText value="#{(estado.index + 1)}. #{option.description}" style="display:block"/>
+	          </ui:repeat>
 	        </ui:repeat>
         </h:panelGroup>
         <div class="linea"/>
         <h4>Nueva pregunta:</h4>
         <h:panelGroup id="pgNuevaPregunta">
           <p:messages id="messagesPregunta" showDetail="true" closable="true"/>
+          <!-- Tipo de pregunta -->
+          <p:outputLabel for="tipoPregunta" value="Tipo de pregunta:" style="display:block"/>
+          <p:selectOneMenu id="tipoPregunta" value="#{newTestBean.newquestion.type}" style="display:block" required="true">
+          	<f:selectItem itemLabel="Múltiple" itemValue="MULTIPLE"/>
+          	<f:selectItem itemLabel="Abierta" itemValue="OPEN"/>
+          	<p:ajax event="change" actionListener="#{generalBean.actualizar()}" process="@this" update="optionsQuestion"/>
+          </p:selectOneMenu>
+          <br/>
           <!-- Contenido -->
           <p:outputLabel for="content3" value="Contenido:" style="display:block"/>
-          <p:editor id="content3" value="#{newTestBean.newquestion.content}" height="300" style="margin-top:15px; margin-bottom:10px" required="true" requiredMessage="La pregunta debe tener un contenido"/>
+          <p:editor id="content3" value="#{newTestBean.newquestion.content}" height="200" style="margin-top:15px; margin-bottom:10px" required="true" requiredMessage="La pregunta debe tener un contenido"/>
           <p:message for="content3" style="display:block"/>
+          <!-- Opciones (MULTIPLE) -->
+          <h:panelGroup id="optionsQuestion">
+          	<h:panelGroup rendered="#{newTestBean.newquestion.type eq 'MULTIPLE'}">
+          	<br/>
+          		<ui:repeat value="#{newTestBean.optionsQuestion}" var="optionQuestion" varStatus="estado">
+          			<!-- Descripción -->
+          			<h:panelGroup style="display:block">
+          				<p:outputLabel for="option_description" value="Opción #{(estado.index + 1)}" style="display:inline-block"/>
+          				<p:commandLink actionListener="#{newTestBean.eliminarOpcion(optionQuestion)}" process="@this" update="formNewTest:optionsQuestion">
+          					<h:outputText value="" class="fa fa-remove enlace-tree"/>
+          				</p:commandLink>
+          			</h:panelGroup>
+          			<p:inputTextarea id="option_description" value="#{optionQuestion.description}" required="true" requiredMessage="La descripción es requerida" style="width:100%">
+          				<p:ajax event="change" listener="#{generalBean.actualizar()}" process="@this" update="@this"/>
+          			</p:inputTextarea>
+          			<p:message for="option_description" style="display:block"/>
+          			<!-- Answer -->
+          			<p:outputLabel for="option_answer" value="¿Es la respuesta correcta?" style="display:block"/>
+          			<p:selectOneRadio id="option_answer" value="#{optionQuestion.answer}">
+          				<f:selectItem itemLabel="Sí" itemValue="#{true}"/>
+          				<f:selectItem itemLabel="No" itemValue="#{false}"/>
+          				<p:ajax event="change" listener="#{generalBean.actualizar()}" process="@this" update="@this"/>
+          			</p:selectOneRadio>
+          			<br/>
+          		</ui:repeat>
+          		<p:commandButton class="btnh" value="Agregar opción" actionListener="#{newTestBean.agregarOpcion()}" process="@this" update="optionsQuestion"/>
+          		<br/>
+          		<br/>
+          	</h:panelGroup>
+          </h:panelGroup>
+          
+          
           <!-- Puntos -->
           <p:outputLabel for="puntos" value="Puntos:" style="display:block"/>
           <p:inputNumber id="puntos" value="#{newTestBean.newquestion.points}" style="display:block" required="true" requiredMessage="Debe indicar la cantidad de puntos para la pregunta">
             <f:validateDoubleRange minimum="0.1" maximum="100"/>
           </p:inputNumber>
           <p:message for="puntos" style="display:block"/>
-
+          
+          <div style="text-align:center">
           <p:commandButton class="btnh" value="Agregar pregunta" actionListener="#{newTestBean.agregarPregunta()}" process="pgNuevaPregunta" update="pgPreguntas pgNuevaPregunta"/>
+          </div>
         </h:panelGroup>
         <br/><br/><br/><br/>
         

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 12/09/2018 04:55:27 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 2/10/2018 11:28:18 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="mx.com.juan.camacho.entidadesdb.Test" table="test" schema="public" optimistic-lock="version">
         <id name="id" type="int">
@@ -17,11 +17,17 @@
         <property name="FCreate" type="timestamp">
             <column name="f_create" length="29" />
         </property>
-        <set name="questions" table="question" inverse="true" order-by="id" lazy="true" fetch="select">
+        <set name="questions" table="question" inverse="true" lazy="true" fetch="select" order-by="random()">
             <key>
                 <column name="test_id" not-null="true" />
             </key>
             <one-to-many class="mx.com.juan.camacho.entidadesdb.Question" />
+        </set>
+        <set name="levelTests" table="level_test" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="test_id" not-null="true" />
+            </key>
+            <one-to-many class="mx.com.juan.camacho.entidadesdb.LevelTest" />
         </set>
     </class>
 </hibernate-mapping>

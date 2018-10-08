@@ -16,6 +16,11 @@ public class EditBlogBean extends mx.com.juan.camacho.beans.GeneralVistaBean {
   public void setIdBlog(int idBlog) {
     try {
       this.editblog = (Blog)this.dataSource.consultarObjeto("SELECT blog FROM Blog blog WHERE blog.id =" + idBlog);
+      System.out.println(this.usuarioBean.getUserappSession().getId() +" +  "+ this.editblog.getUserapp().getId());
+      if(this.usuarioBean.getUserappSession().getId() != this.editblog.getUserapp().getId()) {
+    	  this.editblog = null;
+    	  this.mostrarPagina("inicio/inicioSistema");
+      }
     } catch(Exception e) {
       this.mostrarModal("No se pudo consultar el blog " + idBlog + ". " + e.getMessage(),"fatal");
     }
